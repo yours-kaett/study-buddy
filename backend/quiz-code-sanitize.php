@@ -2,12 +2,14 @@
 include "../db-connection.php";
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
     function validate($data)
     {
         return htmlspecialchars(trim($data));
     }
     $quiz_code = validate($_POST['quiz_code']);
+
+    $quiz_code_data = 'quiz_code=' . $quiz_code;
 
     $stmt = $conn->prepare(' SELECT student_answer FROM tbl_quiz_student WHERE quiz_code = ? AND student_id = ? ');
     $stmt->bind_param('si', $quiz_code, $_SESSION['id']);
@@ -15,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->get_result();
     $rows = $result->fetch_assoc();
     if (!empty($rows['student_answer'])) {
-        header("Location: ../pages/student/quiz-code-input.php?error=You were already done with the quiz based on your quiz code.");
+        header("Location: ../pages/student/quiz-code-input.php?warning&$quiz_code_data");
         exit();
     } else {
         $stmt = $conn->prepare(' SELECT quiz_code FROM tbl_quiz WHERE quiz_code = ? ');
@@ -27,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../pages/student/quiz.php?id=" . $rows['quiz_code'] . "");
             exit();
         } else {
-            header("Location: ../pages/student/quiz-code-input.php?error=Quiz code not found.");
+            header("Location: ../pages/student/quiz-code-input.php?error&$quiz_code_data");
             exit();
         }
     }
 } else {
-    header("Location: ../pages/student/quiz-code-input.php?error=Unknown error occurred.");
+    header("Location: ../index.php");
     exit();
 }

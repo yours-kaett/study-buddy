@@ -18,10 +18,10 @@
             <img src="img/ICT-StudyBuddyLogo.png" width="250" alt="Study Buddy Logo">
             <div class="card">
                 <div class="w-100">
-                    <a href="choose-user.php" id="get-started-button">
+                    <a href="choose-user.php">
                         <button class="btn-a w-100 mt-5">
                             <span>
-                                Get Started &nbsp; <i class="bi bi-chevron-double-right"></i>
+                                Get Started
                             </span>
                         </button>
                     </a>

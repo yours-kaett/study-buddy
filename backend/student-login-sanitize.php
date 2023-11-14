@@ -33,11 +33,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 header("Location: ../pages/student/home.php");
                 exit();
             } else {
-                header("Location: ../student-login.php?error=Invalid username or password.");
+                header("Location: ../student-login.php?invalid");
                 exit();
             }
         } else {
-            header("Location: ../student-login.php?error=Invalid username or password.");
+            header("Location: ../student-login.php?invalid");
             exit();
         }
     } catch (Exception $e) {

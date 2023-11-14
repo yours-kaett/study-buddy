@@ -21,7 +21,7 @@ if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['passwor
     $result = $stmt->get_result();
 
     if (mysqli_num_rows($result) > 0) {
-        header("Location: ../student-signup.php?error=Username already taken.");
+        header("Location: ../student-signup.php?invalid");
         exit();
     }
     else {
@@ -34,10 +34,10 @@ if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['passwor
         $stmt->bind_param('sssiis', $email, $username, $password, $grade_level, $section, $img_url);
         $stmt->execute();
         $result = $stmt->get_result();
-        header("Location: ../student-signup.php?success=Account created successfully.");
+        header("Location: ../student-signup.php?success");
         exit();
     }
 } else {
-    header("Location: ../student-signup.php?error=Unknown error occured.");
+    header("Location: ../student-signup.php?error");
     exit();
 }

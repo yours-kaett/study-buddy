@@ -14,22 +14,23 @@ if ($_SESSION['username']) {
         <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="../../bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
         <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
     </head>
 
     <body>
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
                 <h4 class="fw-bolder mt-2">Self Practice</h4>
                 <a href="account.php">
-                    <img src="../../img/profile.jpg" alt="">
+                    <img src="../../img/<?php echo $_SESSION['img_url'] ?>" alt="">
                 </a>
             </div>
         </header>
         <main>
-            <div class="container practice">
-                <div class="card">
+            <div class="container practice mt-5 mb-3">
+                <div class="card mb-5">
                     <div class="card-body">
                         <form action="../../backend/practice-submit.php?id=<?php echo $_GET['id'] ?>" method="POST">
                             <?php
@@ -44,7 +45,7 @@ if ($_SESSION['username']) {
                             $result = $stmt->get_result();
                             $rows = $result->fetch_assoc();
                             echo '
-                                <h5 class="mb-5">Topic: ' . $rows['topic_title'] . ' </h5>
+                                <h5 class="fw-bold mb-5 mt-3">Topic: ' . $rows['topic_title'] . ' </h5>
                             ';
 
                             $stmt = $conn->prepare(' SELECT * FROM tbl_practice_student WHERE topic_id = ? AND student_id = ? ');
@@ -94,7 +95,7 @@ if ($_SESSION['username']) {
                                 $correct_answer = $rows['correct_answer'];
                                 $student_answer = $rows['student_answer'];
                                 echo '
-                                    <h6>' . $item_number . ". " . $question . '</h6>
+                                    <h6 class="fw-bold">' . $item_number . ". " . $question . '</h6>
                                     <fieldset class="row mb-4 mt-3">
                                         <div class="col-sm-10">
                                             <div class="form-check mb-2">
@@ -133,7 +134,7 @@ if ($_SESSION['username']) {
                             }
                             ?>
                             <hr>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex">
                                 <button class="btn-reset w-50 d-flex align-items-center justify-content-center p-2" type="reset">
                                     Reset
                                 </button>&nbsp; &nbsp;
@@ -149,21 +150,21 @@ if ($_SESSION['username']) {
         </main>
 
         <footer>
-            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
-                <a href="home.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-house fs-5 fw-bolder"></i>
+            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5 border">
+                <a href="home.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-home fs-3 fw-bolder"></i>
                     Home
                 </a>
-                <a href="topics.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
-                    <i class="bi bi-collection-fill fs-5 fw-bolder"></i>
+                <a href="#" class="d-flex flex-column align-items-center mt-2" style="color: #3552a1;">
+                    <i class="bx bxs-book-open fs-3 fw-bolder"></i>
                     Topics
                 </a>
-                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-grid-3x3-gap fs-5 fw-bolder"></i>
+                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-grid-alt fs-3 fw-bolder"></i>
                     Take quiz
                 </a>
-                <a href="notifications.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-bell fs-5 fw-bolder"></i>
+                <a href="notifications.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-bell fs-3 fw-bolder"></i>
                     <span>Notifications
                         <?php
                         $notifications = 0;
@@ -173,7 +174,6 @@ if ($_SESSION['username']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -192,7 +192,6 @@ if ($_SESSION['username']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

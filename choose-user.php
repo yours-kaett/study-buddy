@@ -15,27 +15,25 @@
     <main>
         <div class="container starters min-vh-100">
             <img src="img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
-            <h4 class="fw-bold mt-4">Login as</h4>
             <div class="card">
                 <a href="student-login.php">
-                    <button class="btn-b w-100 me-5">
+                    <button class="btn-b w-100 mt-4">
                         <span>
                             <i class="bi bi-mortarboard"></i>&nbsp; Student
                         </span>
                     </button>
                 </a>
                 <a href="teacher-login.php">
-                    <button class="btn-a w-100 me-5 mt-2 mb-2">
+                    <button class="btn-a w-100 mt-2">
                         <span>
                             <i class="bi bi-briefcase"></i>&nbsp; Teacher
                         </span>
                     </button>
                 </a>
             </div>
-            <div id="content"></div>
+            <!-- <div id="content"></div> -->
         </div>
     </main>
-
 </body>
 
 </html>

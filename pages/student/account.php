@@ -20,12 +20,8 @@ if ($_SESSION['username']) {
 
     <body>
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-                <div></div>
+            <div class="top-0 fixed-top p-2 border">
                 <h4 class="fw-bolder mt-2">Profile</h4>
-                <a href="account.php">
-                    <img src="../../img/profile.jpg" alt="">
-                </a>
             </div>
         </header>
         <main>
@@ -43,12 +39,12 @@ if ($_SESSION['username']) {
             $phone_number = $rows['phone_number'];
             ?>
             <div class="starters">
-                <div class="card mt-5 mb-5">
+                <div class="card mb-5 mt-5">
                     <div class="card-body">
                         <form action="../backend/update-profile.php" method="POST" enctype="multipart/form-data">
                             <div class="row mb-3">
                                 <div class="d-flex align-items-center flex-column mt-5">
-                                    <img src="../../img/profile.jpg" width="120" height="120" alt="Profile" class="profile" id="uploadedImg">
+                                    <img src="../../img/<?php echo $_SESSION['img_url'] ?>" width="120" height="120" alt="Profile" class="profile" id="uploadedImg">
                                     <div class="pt-2">
                                         <label class="btn btn-outline-primary btn-sm" tabindex="0">
                                             <i class="bi bi-upload"></i>
@@ -108,7 +104,7 @@ if ($_SESSION['username']) {
                                     Save Changes
                                 </button>
                             </div>
-                            <div class="w-100 text-center mt-2">
+                            <div class="w-100 text-center mt-2 mb-5">
                                 <a href="../../logout.php">
                                     <button type="button" class="btn btn-outline-success w-100">
                                         Signout
@@ -122,7 +118,7 @@ if ($_SESSION['username']) {
         </main>
 
         <footer>
-            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
+            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5 border">
                 <a href="home.php" class="d-flex flex-column align-items-center">
                     <i class="bi bi-house fs-5 fw-bolder"></i>
                     Home
@@ -151,8 +147,7 @@ if ($_SESSION['username']) {
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
                             ';
-                        if ($notifications === 0)
-                        {
+                        if ($notifications === 0) {
                             echo '
                                 <script>
                                     document.getElementById("notifications").style.display = "none";

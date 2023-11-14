@@ -14,25 +14,26 @@ if ($_SESSION['username']) {
         <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="../../bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
         <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
     </head>
 
     <body onload="startCounter()">
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
                 <h4 class="fw-bolder mt-2">Quiz Mode</h4>
                 <a href="account.php">
-                    <img src="../../img/profile.jpg" alt="">
+                    <img src="../../img/<?php echo $_SESSION['img_url'] ?>" alt="">
                 </a>
             </div>
         </header>
         <main>
-            <div class="container practice">
-                <div class="card p-2">
+            <div class="container practice mt-5 mb-3">
+                <div class="card mb-5">
                     <div class="card-body">
                         <form action="../../backend/quiz-submit.php?id=<?php echo $_GET['id'] ?>" method="POST">
-                            <h5 class="text-center mb-3" id="timer"><strong>00:00</strong></h5>
+                            <h4 class="text-success text-center mb-4 mt-3 fw-bold" id="timer">00:00</h4>
                             <?php
                             $stmt = $conn->prepare(' SELECT * FROM tbl_quiz_student WHERE quiz_code = ? AND student_id = ? ');
                             $stmt->bind_param('ii', $_GET['id'], $_SESSION['id']);
@@ -52,8 +53,8 @@ if ($_SESSION['username']) {
                                 $direction = $rows['direction'];
                                 $topic_title = $rows['topic_title'];
                                 echo '
-                                <h6>Direction: ' . $direction . '</h6>
-                                <h6 class="mt-3 mb-5">Topic: <strong>' . $topic_title . '</strong></h6>
+                                <h6>Direction: <span class="fw-bold">' . $direction . '</span></h6>
+                                <h6 class="mt-3 mb-5">Topic: <span class="fw-bold">' . $topic_title . '</span></h6>
                             ';
                                 $stmt = $conn->prepare(' SELECT * FROM tbl_quiz_student WHERE quiz_code = ? AND student_id = ? ');
                                 $stmt->bind_param('ii', $_GET['id'], $_SESSION['id']);
@@ -106,10 +107,10 @@ if ($_SESSION['username']) {
                                     $student_answer = $rows['student_answer'];
 
                                     echo '
-                                <h6>' . $item_number . ". " . $question . '</h6>
+                                <h6 class="fw-bold">' . $item_number . ". " . $question . '</h6>
                                 <fieldset class="row mb-4 mt-3">
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option1_' . $item_number . '" value="' . $choice1 . '" required>
                                             <label class="form-check-label" for="option1_' . $item_number . '">
                                                 ' . $choice1 . '
@@ -117,7 +118,7 @@ if ($_SESSION['username']) {
                                         </div>
                                     </div3
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option2_' . $item_number . '" value="' . $choice2 . '" required>
                                             <label class="form-check-label" for="option2_' . $item_number . '">
                                                 ' . $choice2 . '
@@ -125,7 +126,7 @@ if ($_SESSION['username']) {
                                         </div>
                                     </div3
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option3_' . $item_number . '" value="' . $choice3 . '" required>
                                             <label class="form-check-label" for="option3_' . $item_number . '">
                                                 ' . $choice3 . '
@@ -133,7 +134,7 @@ if ($_SESSION['username']) {
                                         </div>
                                     </div3
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option4_' . $item_number . '" value="' . $choice4 . '" required>
                                             <label class="form-check-label" for="option4_' . $item_number . '">
                                                 ' . $choice4 . '
@@ -162,21 +163,21 @@ if ($_SESSION['username']) {
         </main>
 
         <footer>
-            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
-                <a href="home.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-house fs-5 fw-bolder"></i>
+            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5 border">
+                <a href="home.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-home fs-3 fw-bolder"></i>
                     Home
                 </a>
-                <a href="topics.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-collection fs-5 fw-bolder"></i>
+                <a href="topics.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-book-open fs-3 fw-bolder"></i>
                     Topics
                 </a>
-                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
-                    <i class="bi bi-grid-3x3-gap-fill fs-5 fw-bolder"></i>
+                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center mt-2" style="color: #3552a1;">
+                    <i class="bx bxs-grid-alt fs-3 fw-bolder"></i>
                     Take quiz
                 </a>
-                <a href="notifications.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-bell fs-5 fw-bolder"></i>
+                <a href="notifications.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-bell fs-3 fw-bolder"></i>
                     <span>Notifications
                         <?php
                         $notifications = 0;
@@ -186,7 +187,6 @@ if ($_SESSION['username']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -205,7 +205,6 @@ if ($_SESSION['username']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

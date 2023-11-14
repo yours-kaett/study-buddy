@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
-        <link rel="stylesheet" href="../../bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
         <link rel="icon" href="../../img/ICT-StudyBuddyLogo.png">
     </head>
@@ -21,51 +21,32 @@ if (isset($_SESSION['username'])) {
         <main>
             <div class="container starters min-vh-100">
                 <img src="../../img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
-                <h3 class="fw-bold mt-4">ICT Mobile Reviewer</h3>
+                <h5 class="mt-4 fw-bold">ICT Mobile Reviewer</h5>
                 <div class="card">
-                    <div class="w-100">
+                    <div class="card-body">
                         <a href="topics.php">
-                            <button class="btn-b w-100 mt-2">
-                                <span>
-                                    <i class="bi bi-collection"></i>&nbsp; Topics
-                                </span>
+                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
+                                <i class="bx bx-book-open fs-5"></i>&nbsp; Topics
                             </button>
                         </a>
-                    </div>
-                    <div class="w-100">
                         <a href="quiz-code-input.php">
-                            <button class="btn-b w-100 mt-2">
-                                <span>
-                                    <i class="bi bi-grid-3x3-gap"></i>&nbsp; Take Quiz
-                                </span>
+                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
+                                <i class="bx bx-grid-alt fs-5"></i>&nbsp; Take Quiz
                             </button>
                         </a>
-                    </div>
-                    <div class="w-100">
-                        <a href="#">
-                            <button class="btn-b w-100 mt-2">
-                                <span>
-                                    <i class="bi bi-clock-history"></i>&nbsp; User history
-                                </span>
-                            </button>
-                        </a>
-                    </div>
-                    <div class="w-100">
                         <a href="notifications.php">
-                            <button class="btn-b w-100 mt-2">
-                                <span>
-                                    <i class="bi bi-bell"></i>&nbsp; Notifications
-                                </span>
-                                <span class="position-absolute"></span>
+                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
+                                <i class="bx bx-bell fs-5"></i>&nbsp; Notifications
                             </button>
                         </a>
-                    </div>
-                    <div class="w-100">
+                        <a href="#">
+                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
+                                <i class="bx bx-history fs-5"></i>&nbsp; User history
+                            </button>
+                        </a>
                         <a href="../../logout.php">
-                            <button class="btn-a w-100 mt-2">
-                                <span>
-                                    <i class="bi bi-box-arrow-left"></i>&nbsp; Sign out
-                                </span>
+                            <button class="btn-a d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
+                                <i class="bx bx-log-out fs-5"></i>&nbsp; Sign out
                             </button>
                         </a>
                     </div>

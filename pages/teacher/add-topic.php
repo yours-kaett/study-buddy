@@ -69,16 +69,15 @@ if ($_SESSION['id']) {
                         <form action="../../backend/add-topic-sanitize.php" method="POST" class="mb-4 w-100">
                             <div class="w-100 mb-3">
                                 <label>Topic title</label>
-                                <input type="text" name="topic_title" placeholder="Type here" class="starters-input w-100" required>
+                                <input type="text" name="topic_title" placeholder="Type here" class="form-control w-100" required>
                             </div>
-                            <hr>
                             <div id="rows-container"></div>
-                            <button class="btn btn-primary" id="addRow" type="button">
+                            <button class="btn btn-primary btn-sm" id="addRow" type="button">
                                 <i class="bi bi-plus-lg"></i>&nbsp; Add
                             </button>
                             <div class="w-100 mt-5">
                                 <button class="btn-login w-100 d-flex align-items-center justify-content-center" type="submit">
-                                    <span id="login"><i class="bi bi-save"></i>&nbsp; Save</span>
+                                    <span id="login">Save</span>
                                     <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </button>
                             </div>
@@ -127,11 +126,11 @@ if ($_SESSION['id']) {
                     newRow.innerHTML = `
                         <div class="col-lg-2 col-sm-12">
                             <label>Lesson #</label>
-                            <input type="text" name="lesson_number_${rowCounter}" value="${itemNumber++}" placeholder="Type here" class="starters-input mb-2 w-100" required>
+                            <input type="text" name="lesson_number_${rowCounter}" value="${itemNumber++}" placeholder="Type here" class="form-control mb-2 w-100" required>
                         </div>
                         <div class="col-lg-10 col-sm-12">
                             <label>Sub topic title</label>
-                            <input type="text" name="sub_topic_title_${rowCounter}" placeholder="Type here" class="starters-input mb-2 w-100" required>
+                            <input type="text" name="sub_topic_title_${rowCounter}" placeholder="Type here" class="form-control mb-2 w-100" required>
                         </div>
                         <div class="col-lg-12">
                             <label>Discussion</label>
