@@ -1,7 +1,15 @@
 <?php
 include '../../db-connection.php';
 session_start();
-if ($_SESSION['id']) {
+if (($_SESSION['id'])) {
+    $session_id = $_SESSION['id'];
+    $topic_id = $_GET['id'];
+    $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
+    $stmt->bind_param('i', $session_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = $result->fetch_assoc();
+    $img_url = $rows['img_url'];
 ?>
 
     <!DOCTYPE html>
@@ -13,9 +21,9 @@ if ($_SESSION['id']) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
-        <link rel="stylesheet" href="../../bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
-        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
+        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.png">
         <style>
             .background-waiting {
                 background-color: #0000008f;
@@ -47,9 +55,9 @@ if ($_SESSION['id']) {
     <body onload="loaderFunction()">
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2">
-                <h4 class="fw-bolder mt-2 ms-1">Challenge Mode</h4>
-                <a href="account.php" class="me-1">
-                    <img src="../../img/profile.jpg" alt="">
+                <h4 class="fw-bolder mt-2">Challenge Mode</h4>
+                <a href="account.php">
+                    <img src="../../img/<?php echo $img_url ?>" alt="">
                 </a>
             </div>
         </header>
@@ -136,40 +144,7 @@ if ($_SESSION['id']) {
                             $stmt->execute();
                             $result = $stmt->get_result();
                             if (mysqli_num_rows($result) > 0) {
-                                // $student_answer = '';
-                                // $stmt = $conn->prepare(' UPDATE tbl_practice_duo SET student_answer = ? WHERE topic_id = ? AND student_id = ?  ');
-                                // $stmt->bind_param('sii', $student_answer, $topic_id, $_SESSION['id']);
-                                // $stmt->execute();
                             } else {
-                                // $stmt = $conn->prepare(' SELECT * FROM tbl_invite_practice WHERE topic_id = ? ');
-                                // $stmt->bind_param('i', $topic_id);
-                                // $stmt->execute();
-                                // $result = $stmt->get_result();
-                                // $row = $result->fetch_assoc();
-                                // $room_id = $row['room_id'];
-
-                                // $stmt = $conn->prepare(' SELECT * FROM tbl_practice WHERE topic_id = ? ');
-                                // $stmt->bind_param('i', $topic_id);
-                                // $stmt->execute();
-                                // $result = $stmt->get_result();
-                                // if ($result->num_rows > 0) {
-                                //     while ($rows = $result->fetch_assoc()) {
-                                //         $topic_id = $rows["topic_id"];
-                                //         $item_number = $rows["item_number"];
-                                //         $question = $rows["question"];
-                                //         $choice1 = $rows["choice1"];
-                                //         $choice2 = $rows["choice2"];
-                                //         $choice3 = $rows["choice3"];
-                                //         $choice4 = $rows["choice4"];
-                                //         $correct_answer = $rows["correct_answer"];
-
-                                //         $stmt = $conn->prepare(' INSERT INTO tbl_practice_duo 
-                                //         (topic_id, item_number, question, choice1, choice2, choice3, choice4, correct_answer, student_id, room_id) 
-                                //         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ');
-                                //         $stmt->bind_param("iissssssii", $topic_id, $item_number, $question, $choice1, $choice2, $choice3, $choice4, $correct_answer, $_SESSION['id'], $room_id);
-                                //         $stmt->execute();
-                                //     }
-                                // }
                             }
 
                             $stmt = $conn->prepare(' SELECT * FROM tbl_practice WHERE topic_id = ? ');
@@ -241,21 +216,21 @@ if ($_SESSION['id']) {
         </main>
 
         <footer>
-            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
-                <a href="home.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-house fs-5 fw-bolder"></i>
+            <div class="d-flex align-items-center justify-content-between fixed-bottom px-5">
+                <a href="home.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-home-alt fs-3 fw-bolder"></i>
                     Home
                 </a>
-                <a href="topics.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
-                    <i class="bi bi-collection-fill fs-5 fw-bolder"></i>
+                <a href="#" class="d-flex flex-column align-items-center mt-2" style="color: #3552a1;">
+                    <i class="bx bxs-collection fs-3 fw-bolder"></i>
                     Topics
                 </a>
-                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-grid-3x3-gap fs-5 fw-bolder"></i>
-                    Take quiz
+                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-pencil fs-3 fw-bolder"></i>
+                    Quiz
                 </a>
-                <a href="notifications.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-bell fs-5 fw-bolder"></i>
+                <a href="notifications.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-bell fs-3 fw-bolder"></i>
                     <span>Notifications
                         <?php
                         $notifications = 0;

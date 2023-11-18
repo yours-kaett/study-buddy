@@ -40,7 +40,7 @@
                     </div>
                     <div class="w-100">
                         <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
-                            <span id="login">Login &nbsp;<i class="bi bi-box-arrow-in-right"></i></span>
+                            <span id="login">Login</span>
                             <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </button>
                     </div>

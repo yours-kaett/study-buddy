@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="boxicons/css/boxicons.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="img/ICT-StudyBuddyLogo.png">
 </head>
@@ -20,14 +21,14 @@
                 <a href="student-login.php">
                     <button class="btn-b w-100 me-5">
                         <span>
-                            <i class="bi bi-mortarboard"></i>&nbsp; Student
+                            <i class="bx bxs-backpack"></i>&nbsp; Student
                         </span>
                     </button>
                 </a>
                 <a href="teacher-login.php">
                     <button class="btn-a w-100 me-5 mt-2 mb-2">
                         <span>
-                            <i class="bi bi-briefcase"></i>&nbsp; Teacher
+                            <i class="bx bxs-briefcase"></i>&nbsp; Teacher
                         </span>
                     </button>
                 </a>
