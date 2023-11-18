@@ -1,7 +1,15 @@
 <?php
 include '../../db-connection.php';
 session_start();
-if ($_SESSION['username']) {
+if (($_SESSION['id'])) {
+    $session_id = $_SESSION['id'];
+    $topic_id = $_GET['id'];
+    $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
+    $stmt->bind_param('i', $session_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = $result->fetch_assoc();
+    $img_url = $rows['img_url'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -12,9 +20,9 @@ if ($_SESSION['username']) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
-        <link rel="stylesheet" href="../../bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
-        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
+        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.png">
     </head>
 
     <body>
@@ -22,7 +30,7 @@ if ($_SESSION['username']) {
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
                 <h4 class="fw-bolder mt-2">Challenge Mode</h4>
                 <a href="account.php">
-                    <img src="../../img/profile.jpg" alt="">
+                    <img src="../../img/<?php echo $img_url ?>" alt="">
                 </a>
             </div>
         </header>
@@ -72,7 +80,7 @@ if ($_SESSION['username']) {
                             if ($student_answer !== '' && $student_answer === $correct_answer) {
                                 echo '
                                     <h6 class="bg-success text-white p-2 mb-4 d-flex align-items-center">
-                                        <span class="fs-4"><i class="bi bi-check"></i></span>&nbsp; &nbsp;
+                                        <span class="fs-4"><i class="bx bx-check"></i></span>&nbsp; &nbsp;
                                         <span>' . $student_answer . '</span> 
                                     </h6>
                                 ';
@@ -80,7 +88,7 @@ if ($_SESSION['username']) {
                             } else {
                                 echo '
                                     <h6 class="bg-danger text-white mb-4 p-2 d-flex align-items-center">
-                                        <span class="fs-4"><i class="bi bi-x"></i></span>&nbsp; &nbsp;
+                                        <span class="fs-4"><i class="bx bx-x"></i></span>&nbsp; &nbsp;
                                         <span>' . $student_answer . '</span> 
                                     </h6>
                                 ';
@@ -95,13 +103,13 @@ if ($_SESSION['username']) {
                                     <h6>Score Attained</h6>
                                     <h3>' . $score . ' out of ' . $total_items . '</h3>
                                     <h3 class="mt-3" style="color: #e6ca2d;">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bx bx-star-fill"></i>
+                                        <i class="bx bx-star-fill"></i>
+                                        <i class="bx bx-star-fill"></i>
                                         <strong>PERFECT</strong>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bx bx-star-fill"></i>
+                                        <i class="bx bx-star-fill"></i>
+                                        <i class="bx bx-star-fill"></i>
                                     </h3>
                                 </div>
                             </div>
@@ -136,10 +144,9 @@ if ($_SESSION['username']) {
                             $student_id = $row['student_id'];
                             $student_answer = $row['student_answer'];
                             $correct_answer = $row['correct_answer'];
-                            if ($student_answer === '')
-                            {
+                            if ($student_answer === '') {
                                 $opponent_score = 'on progress...';
-                            } 
+                            }
                             if ($student_answer === $correct_answer) {
                                 if ($student_id !== $_SESSION['id']) {
                                     $opponent_score++;
@@ -157,32 +164,37 @@ if ($_SESSION['username']) {
                         $stmt->close();
 
                         ?>
+                        <a href="topics.php" class="btn btn-outline-success btn-sm d-flex align-items-center fixed-bottom ms-3 mb-5" style="margin-bottom: 70px !important; width: 140px;">
+                            <i class="bx bx-left-arrow-alt fs-5"></i>
+                            &nbsp;Back to Topics
+                        </a>
                     </div>
                 </div>
             </div>
         </main>
 
         <footer>
-            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
-                <a href="home.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-house fs-5 fw-bolder"></i>
+            <div class="d-flex align-items-center justify-content-between fixed-bottom px-5">
+                <a href="home.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-home-alt fs-3 fw-bolder"></i>
                     Home
                 </a>
-                <a href="topics.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
-                    <i class="bi bi-collection-fill fs-5 fw-bolder"></i>
+                <a href="#" class="d-flex flex-column align-items-center mt-2" style="color: #3552a1;">
+                    <i class="bx bxs-collection fs-3 fw-bolder"></i>
                     Topics
                 </a>
-                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-grid-3x3-gap fs-5 fw-bolder"></i>
-                    Take quiz
+                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-pencil fs-3 fw-bolder"></i>
+                    Quiz
                 </a>
-                <a href="notifications.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-bell fs-5 fw-bolder"></i>
+                <a href="notifications.php" class="d-flex flex-column align-items-center mt-2">
+                    <i class="bx bx-bell fs-3 fw-bolder"></i>
                     <span>Notifications
                         <?php
                         $notifications = 0;
-                        $stmt = $conn->prepare(' SELECT * FROM tbl_invite_practice WHERE invite_to = ? ');
-                        $stmt->bind_param('i', $_SESSION['id']);
+                        $invite_status_id = 2;
+                        $stmt = $conn->prepare(' SELECT * FROM tbl_invite_practice WHERE invite_to = ? AND invite_status_id = ?');
+                        $stmt->bind_param('ii', $_SESSION['id'], $invite_status_id);
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
