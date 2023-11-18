@@ -12,23 +12,24 @@
     <link rel="icon" href="img/ICT-StudyBuddyLogo.png">
 </head>
 
-<body>
+<body onload="onloadFn()">
     <main>
         <div class="container starters min-vh-100">
             <img src="img/ICT-StudyBuddyLogo.png" width="250" alt="Study Buddy Logo">
-            <div class="card">
-                <div class="w-100">
-                    <a href="choose-user.php">
-                        <button class="btn-a w-100 mt-5">
-                            <span>
-                                Get Started
-                            </span>
-                        </button>
-                    </a>
-                </div>
-            </div>
         </div>
     </main>
+    <script>
+        var load;
+
+        function onloadFn() {
+            load = setTimeout(showpage, 3000);
+
+        }
+
+        function showpage() {
+            window.location.href = "choose-user.php";
+        }
+    </script>
 
 </body>
 

@@ -1,7 +1,14 @@
 <?php
 include '../../db-connection.php';
 session_start();
-if ($_SESSION['username']) {
+if ($_SESSION['id']) {
+    $session_id = $_SESSION['id'];
+    $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
+    $stmt->bind_param('i', $session_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = $result->fetch_assoc();
+    $img_url = $rows['img_url'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -14,15 +21,15 @@ if ($_SESSION['username']) {
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
-        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
+        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.png">
     </head>
 
     <body>
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
                 <h4 class="fw-bolder mt-2">Quiz Code</h4>
                 <a href="account.php">
-                    <img src="../../img/<?php echo $_SESSION['img_url'] ?>" alt="">
+                    <img src="../../img/<?php echo $img_url ?>" alt="">
                 </a>
             </div>
         </header>
@@ -48,7 +55,21 @@ if ($_SESSION['username']) {
             <div class="container starters min-vh-100">
                 <div class="card mb-5">
                     <div class="card-body">
-                        <form action="../../backend/quiz-code-sanitize.php" method="POST" class="w-100 mb-4 mt-5">
+                        <?php
+                        if (isset($_GET['done'])) {
+                        ?>
+                            <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center mb-2" role="alert">
+                                <div>
+                                    <?php echo $_GET['done'], "You've already responded."; ?>
+                                    <a href="quiz-code-input.php">
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <form action="../../backend/quiz-code-sanitize.php" method="POST" class="w-100 mb-4 mt-4">
                             <div class="row mb-3">
                                 <div class="col-lg-12">
                                     <label for="quiz_code" class="fw-bold">Quiz Code</label>
@@ -78,20 +99,20 @@ if ($_SESSION['username']) {
         </main>
 
         <footer>
-            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5 border">
-                <a href="home.php" class="d-flex flex-column align-items-center mt-2">
-                    <i class="bx bx-home fs-3 fw-bolder"></i>
+            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
+                <a href="home.php" class="d-flex flex-column align-items-center">
+                    <i class="bx bx-home-alt fs-3 fw-bolder"></i>
                     Home
                 </a>
-                <a href="topics.php" class="d-flex flex-column align-items-center mt-2">
-                    <i class="bx bx-book-open fs-3 fw-bolder"></i>
+                <a href="topics.php" class="d-flex flex-column align-items-center">
+                    <i class="bx bx-collection fs-3 fw-bolder"></i>
                     Topics
                 </a>
-                <a href="#" class="d-flex flex-column align-items-center mt-2" style="color: #3552a1;">
-                    <i class="bx bxs-grid-alt fs-3 fw-bolder"></i>
-                    Take quiz
+                <a href="quiz-code-input.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
+                    <i class="bx bxs-pencil fs-3 fw-bolder"></i>
+                    Quiz
                 </a>
-                <a href="notifications.php" class="d-flex flex-column align-items-center mt-2">
+                <a href="notifications.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-bell fs-3 fw-bolder"></i>
                     <span>Notifications
                         <?php

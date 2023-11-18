@@ -17,7 +17,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
     $result = $stmt->get_result();
     $rows = $result->fetch_assoc();
     if (!empty($rows['student_answer'])) {
-        header("Location: ../pages/student/quiz-code-input.php?warning&$quiz_code_data");
+        header("Location: ../pages/student/quiz-code-input.php?done");
         exit();
     } else {
         $stmt = $conn->prepare(' SELECT quiz_code FROM tbl_quiz WHERE quiz_code = ? ');

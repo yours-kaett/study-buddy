@@ -25,28 +25,43 @@ if (isset($_SESSION['username'])) {
                 <div class="card">
                     <div class="card-body">
                         <a href="topics.php">
-                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
-                                <i class="bx bx-book-open fs-5"></i>&nbsp; Topics
+                            <button class="btn-b w-100 mt-2">
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <i class="bx bx-collection fs-3"></i>&nbsp; Topics
+                                </span>
                             </button>
                         </a>
                         <a href="quiz-code-input.php">
-                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
-                                <i class="bx bx-grid-alt fs-5"></i>&nbsp; Take Quiz
+                            <button class="btn-b w-100 mt-2">
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <i class="bx bx-pencil fs-3"></i>&nbsp; Quiz
+                                </span>
                             </button>
                         </a>
-                        <a href="notifications.php">
-                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
-                                <i class="bx bx-bell fs-5"></i>&nbsp; Notifications
-                            </button>
-                        </a>
+                    </div>
+                    <div class="w-100">
                         <a href="#">
-                            <button class="btn-b d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
-                                <i class="bx bx-history fs-5"></i>&nbsp; User history
+                            <button class="btn-b w-100 mt-2">
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <i class="bx bx-history fs-3"></i>&nbsp; History
+                                </span>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="w-100">
+                        <a href="notifications.php">
+                            <button class="btn-b w-100 mt-2">
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <i class="bx bx-bell fs-3"></i>&nbsp; Notifications
+                                </span>
+                                <span class="position-absolute"></span>
                             </button>
                         </a>
                         <a href="../../logout.php">
-                            <button class="btn-a d-flex align-items-center justify-content-center w-100 mt-2 ps-5 pe-5 fw-bold">
-                                <i class="bx bx-log-out fs-5"></i>&nbsp; Sign out
+                            <button class="btn-a w-100 mt-2">
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <i class="bx bx-door-open fs-3"></i>&nbsp; Sign out
+                                </span>
                             </button>
                         </a>
                     </div>

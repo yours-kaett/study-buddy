@@ -26,11 +26,9 @@
                         <input type="password" name="password" id="password" placeholder="Password" class="starters-input mb-3 w-100 me-5" required>
                     </div>
                     <div class="w-100">
-                        <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center bg-secondary" id="submit" type="submit" onclick="submitFn()">
+                        <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
                             <span id="login">Login</span>
-                            <span id="loading" aria-hidden="true">
-                                <i class="bi bi-gear"></i>
-                            </span>
+                            <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </button>
                     </div>
                 </form>
