@@ -72,6 +72,21 @@
                 </div>
             </div>
         </div>
+        <!-- success & error -->
+        <?php
+        if (isset($_GET['error'])) {
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center fixed-bottom" role="alert">
+                <div>
+                    <?php echo $_GET['error']; ?>
+                    <a href="student-login.php">
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </a>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
     </main>
 
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>

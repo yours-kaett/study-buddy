@@ -34,8 +34,8 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
-            <div class="container starters min-vh-100">
-                <div class="card w-100 mt-5 mb-5 p-3">
+            <div class="container topic mt-5 mb-3">
+                <div class="card w-100 mt-3 mb-5 p-3">
                     <?php
                     $stmt = $conn->prepare(' SELECT * FROM tbl_topics ');
                     $stmt->execute();
@@ -82,7 +82,6 @@ if ($_SESSION['id']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -101,7 +100,6 @@ if ($_SESSION['id']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

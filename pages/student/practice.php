@@ -27,7 +27,7 @@ if ($_SESSION['id']) {
 
     <body>
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
                 <h4 class="fw-bolder mt-2">Self Practice</h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
@@ -35,8 +35,8 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
-            <div class="container practice">
-                <div class="card">
+            <div class="container practice mt-5 mb-3">
+                <div class="card mb-5">
                     <div class="card-body">
                         <form action="../../backend/practice-submit.php?id=<?php echo $_GET['id'] ?>" method="POST">
                             <?php
@@ -51,7 +51,7 @@ if ($_SESSION['id']) {
                             $result = $stmt->get_result();
                             $rows = $result->fetch_assoc();
                             echo '
-                                <h5 class="mb-5">Topic: ' . $rows['topic_title'] . ' </h5>
+                                <h5 class="fw-bold mb-5 mt-3">Topic: ' . $rows['topic_title'] . ' </h5>
                             ';
 
                             $stmt = $conn->prepare(' SELECT * FROM tbl_practice_student WHERE topic_id = ? AND student_id = ? ');
@@ -101,7 +101,7 @@ if ($_SESSION['id']) {
                                 $correct_answer = $rows['correct_answer'];
                                 $student_answer = $rows['student_answer'];
                                 echo '
-                                    <h6>' . $item_number . ". " . $question . '</h6>
+                                    <h6 class="fw-bold">' . $item_number . ". " . $question . '</h6>
                                     <fieldset class="row mb-4 mt-3">
                                         <div class="col-sm-10">
                                             <div class="form-check mb-2">
@@ -140,7 +140,7 @@ if ($_SESSION['id']) {
                             }
                             ?>
                             <hr>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex">
                                 <button class="btn-reset w-50 d-flex align-items-center justify-content-center p-2" type="reset">
                                     Reset
                                 </button>&nbsp; &nbsp;
@@ -180,7 +180,6 @@ if ($_SESSION['id']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -199,7 +198,6 @@ if ($_SESSION['id']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

@@ -27,7 +27,7 @@ if (($_SESSION['id'])) {
 
     <body>
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
                 <h4 class="fw-bolder mt-2">Challenge Mode</h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
@@ -198,7 +198,6 @@ if (($_SESSION['id'])) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -217,7 +216,6 @@ if (($_SESSION['id'])) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

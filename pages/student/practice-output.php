@@ -26,7 +26,7 @@ if ($_SESSION['id']) {
 
     <body>
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
                 <h4 class="fw-bolder mt-2">Self Practice</h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
@@ -34,8 +34,8 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
-            <div class="container practice">
-                <div class="card">
+            <div class="container practice mt-5 mb-3">
+                <div class="card mb-5">
                     <div class="card-body">
                         <?php
                         $stmt = $conn->prepare(' SELECT 
@@ -65,12 +65,12 @@ if ($_SESSION['id']) {
                             $student_answer = $rows['student_answer'];
                             $total_items = mysqli_num_rows($result);
                             echo '
-                                <h6>' . $item_number . ". " . $question . '</h6>
+                                <h6 class="fw-bold">' . $item_number . ". " . $question . '</h6>
                             ';
                             if ($student_answer !== '' && $student_answer === $correct_answer) {
                                 echo '
                                     <h6 class="bg-success text-white p-2 mb-4 d-flex align-items-center">
-                                        <span class="fs-4"><i class="bi bi-check"></i></span>&nbsp; &nbsp;
+                                        <span class="fs-4"><i class="bx bx-check"></i></span>&nbsp; &nbsp;
                                         <span>' . $student_answer . '</span> 
                                     </h6>
                                 ';
@@ -78,7 +78,7 @@ if ($_SESSION['id']) {
                             } else {
                                 echo '
                                     <h6 class="bg-danger text-white mb-4 p-2 d-flex align-items-center">
-                                        <span class="fs-4"><i class="bi bi-x"></i></span>&nbsp; &nbsp;
+                                        <span class="fs-4"><i class="bx bx-x"></i></span>&nbsp; &nbsp;
                                         <span>' . $student_answer . '</span> 
                                     </h6>
                                 ';
@@ -90,16 +90,16 @@ if ($_SESSION['id']) {
                             <hr>
                             <div class="d-flex justify-content-center align-items-center">
                                 <div class="card w-100 d-flex flex-column justify-content-center align-items-center">
-                                    <h6>Score Attained</h6>
-                                    <h3>' . $score . ' out of ' . $total_items . '</h3>
+                                    <h6 class="fw-bold">Score Attained</h6>
+                                    <h3 class="fw-bold">' . $score . ' out of ' . $total_items . '</h3>
                                     <h3 class="mt-3" style="color: #e6ca2d;">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
                                         <strong>PERFECT</strong>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
                                     </h3>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ if ($_SESSION['id']) {
                         ?>
                         <div class="w-100">
                             <a href="practice.php?id=<?php echo $_GET['id']; ?>">
-                                <button class="btn-login w-100">
+                                <button class="btn-login">
                                     Retake
                                 </button>
                             </a>
@@ -155,7 +155,6 @@ if ($_SESSION['id']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -174,7 +173,6 @@ if ($_SESSION['id']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

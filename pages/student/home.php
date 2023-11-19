@@ -21,9 +21,9 @@ if (isset($_SESSION['id'])) {
         <main>
             <div class="container starters min-vh-100">
                 <img src="../../img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
-                <h3 class="fw-bold mt-4">ICT Mobile Reviewer</h3>
+                <h5 class="mt-4 fw-bold">ICT Mobile Reviewer</h5>
                 <div class="card">
-                    <div class="w-100">
+                    <div class="card-body">
                         <a href="topics.php">
                             <button class="btn-b w-100 mt-2">
                                 <span class="d-flex align-items-center justify-content-center">
@@ -31,8 +31,6 @@ if (isset($_SESSION['id'])) {
                                 </span>
                             </button>
                         </a>
-                    </div>
-                    <div class="w-100">
                         <a href="quiz-code-input.php">
                             <button class="btn-b w-100 mt-2">
                                 <span class="d-flex align-items-center justify-content-center">
@@ -59,8 +57,6 @@ if (isset($_SESSION['id'])) {
                                 <span class="position-absolute"></span>
                             </button>
                         </a>
-                    </div>
-                    <div class="w-100">
                         <a href="../../logout.php">
                             <button class="btn-a w-100 mt-2">
                                 <span class="d-flex align-items-center justify-content-center">

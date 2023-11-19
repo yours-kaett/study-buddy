@@ -34,8 +34,26 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
+            <?php
+            if (isset($_GET['warning'])) {
+            ?>
+                <div class="alert alert-warning rounded-0 border-0 alert-dismissible fade show d-flex align-items-center justify-content-center fixed-bottom" style="margin-bottom: 53px !important;" role="alert">
+                    <span class="fw-bold small"><?php echo $_GET['warning'], "You've already took the quiz based on quiz code."; ?></span>
+                    <button type="button" class="btn-close small" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            }
+            if (isset($_GET['error'])) {
+            ?>
+                <div class="alert alert-danger rounded-0 border-0 alert-dismissible fade show d-flex align-items-center justify-content-center fixed-bottom" style="margin-bottom: 53px !important;" role="alert">
+                    <span class="fw-bold small"><?php echo $_GET['error'], "Quiz Code not found."; ?></span>
+                    <button type="button" class="btn-close small" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            }
+            ?>
             <div class="container starters min-vh-100">
-                <div class="card w-100 mt-5 mb-5 p-3">
+                <div class="card mb-5">
                     <div class="card-body">
                         <?php
                         if (isset($_GET['done'])) {
@@ -54,12 +72,22 @@ if ($_SESSION['id']) {
                         <form action="../../backend/quiz-code-sanitize.php" method="POST" class="w-100 mb-4 mt-4">
                             <div class="row mb-3">
                                 <div class="col-lg-12">
-                                    <label>Quiz Code</label>
-                                    <input type="text" name="quiz_code" placeholder="Type here" class="starters-input w-100" required>
+                                    <label for="quiz_code" class="fw-bold">Quiz Code</label>
+                                    <?php
+                                    if (isset($_GET['quiz_code'])) {
+                                    ?>
+                                        <input type="text" name="quiz_code" value="<?php echo $_GET['quiz_code'] ?>" class="starters-input w-100" id="quiz_code" required>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <input type="text" name="quiz_code" placeholder="Type here" class="starters-input w-100" id="quiz_code" required>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                             <div class="w-100">
-                                <button class="btn-login w-100 d-flex align-items-center justify-content-center" type="submit">
+                                <button class="btn-login fw-bold d-flex align-items-center justify-content-center w-100" type="submit">
                                     <span id="login">Join</span>
                                     <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </button>
@@ -95,7 +123,6 @@ if ($_SESSION['id']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -114,7 +141,6 @@ if ($_SESSION['id']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>
