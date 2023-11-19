@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 13, 2023 at 10:58 PM
+-- Generation Time: Nov 19, 2023 at 12:54 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `studybuddy`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_admin`
+--
+
+DROP TABLE IF EXISTS `tbl_admin`;
+CREATE TABLE IF NOT EXISTS `tbl_admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `auth` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbl_admin`
+--
+
+INSERT INTO `tbl_admin` (`id`, `auth`) VALUES
+(1, 1234567890);
 
 -- --------------------------------------------------------
 
@@ -41,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `tbl_grade_level` (
 INSERT INTO `tbl_grade_level` (`id`, `grade_level`) VALUES
 (1, '11th grade'),
 (2, '12th grade'),
-(3, 'null');
+(3, '');
 
 -- --------------------------------------------------------
 
@@ -64,14 +84,7 @@ CREATE TABLE IF NOT EXISTS `tbl_invite_practice` (
   KEY `invite_status_id` (`invite_status_id`),
   KEY `topic_id` (`topic_id`),
   KEY `practice_status_id` (`practice_status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_invite_practice`
---
-
-INSERT INTO `tbl_invite_practice` (`id`, `invite_from`, `invite_to`, `invite_status_id`, `topic_id`, `practice_status_id`, `room_id`) VALUES
-(112, 14, 10, 3, 62, 2, 9735);
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -118,14 +131,6 @@ CREATE TABLE IF NOT EXISTS `tbl_practice` (
   KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_practice`
---
-
-INSERT INTO `tbl_practice` (`id`, `topic_id`, `item_number`, `question`, `choice1`, `choice2`, `choice3`, `choice4`, `correct_answer`, `teacher_id`) VALUES
-(23, 62, 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Marchup Language', 'Hypertext Markup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', 1),
-(24, 62, 2, 'What is HTML in simple terms?', 'Web Architecture', 'Web Structure', 'Web Engineering', 'Web Building', 'Web Structure', 1),
-(25, 62, 3, 'What language is HTML belongs to?', 'Scripting Language', 'Speaking Language', 'Computer Language', 'Programming Language', 'Computer Language', 1);
 
 -- --------------------------------------------------------
 
@@ -150,19 +155,8 @@ CREATE TABLE IF NOT EXISTS `tbl_practice_duo` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`),
   KEY `student_id` (`student_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=416 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `tbl_practice_duo`
---
-
-INSERT INTO `tbl_practice_duo` (`id`, `topic_id`, `item_number`, `question`, `choice1`, `choice2`, `choice3`, `choice4`, `correct_answer`, `student_answer`, `student_id`, `room_id`) VALUES
-(410, 62, 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Marchup Language', 'Hypertext Markup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', '', 14, 9735),
-(411, 62, 2, 'What is HTML in simple terms?', 'Web Architecture', 'Web Structure', 'Web Engineering', 'Web Building', 'Web Structure', '', 14, 9735),
-(412, 62, 3, 'What language is HTML belongs to?', 'Scripting Language', 'Speaking Language', 'Computer Language', 'Programming Language', 'Computer Language', '', 14, 9735),
-(413, 62, 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Marchup Language', 'Hypertext Markup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', 'Hypertext Markup Language', 10, 9735),
-(414, 62, 2, 'What is HTML in simple terms?', 'Web Architecture', 'Web Structure', 'Web Engineering', 'Web Building', 'Web Structure', 'Web Building', 10, 9735),
-(415, 62, 3, 'What language is HTML belongs to?', 'Scripting Language', 'Speaking Language', 'Computer Language', 'Programming Language', 'Computer Language', 'Computer Language', 10, 9735);
+) ENGINE=MyISAM AUTO_INCREMENT=437 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -209,15 +203,6 @@ CREATE TABLE IF NOT EXISTS `tbl_practice_student` (
   KEY `topic_id` (`topic_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_practice_student`
---
-
-INSERT INTO `tbl_practice_student` (`id`, `topic_id`, `item_number`, `question`, `choice1`, `choice2`, `choice3`, `choice4`, `student_answer`, `correct_answer`, `student_id`) VALUES
-(122, 62, 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Marchup Language', 'Hypertext Markup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', 'Hypertext Markup Language', 14),
-(123, 62, 2, 'HTML in short term', 'Web Architecture', 'Web Structure', 'Web Engineering', 'Web Building', 'Web Structure', 'Web Structure', 14),
-(124, 62, 3, 'What language is HTML belong', 'Scripting Language', 'Speaking Language', 'Computer Language', 'Programming Language', 'Speaking Language', 'Computer Language', 14);
-
 -- --------------------------------------------------------
 
 --
@@ -242,14 +227,6 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz` (
   KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_quiz`
---
-
-INSERT INTO `tbl_quiz` (`id`, `quiz_code`, `direction`, `topic_title`, `item_number`, `question`, `choice1`, `choice2`, `choice3`, `choice4`, `correct_answer`, `teacher_id`) VALUES
-(17, '1234567', 'QWERTYUIO dfghjkl; xcvbnm, IUYTRE', 'HTML', 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', 'Hypertext Marchup Language', 'Hypertext Markup Language', 1),
-(18, '1234567', 'QWERTYUIO dfghjkl; xcvbnm, IUYTRE', 'HTML', 2, 'What language category is HTML?', 'Scripting language', 'Speaking language', 'Programming language', 'Computer language', 'Computer language', 1),
-(19, '1234567', 'QWERTYUIO dfghjkl; xcvbnm, IUYTRE', 'HTML', 3, 'HTML in a simple terms', 'Web Engineering', 'Web Architecture', 'Web Structure', 'Web Building', 'Web Structure', 1);
 
 -- --------------------------------------------------------
 
@@ -273,22 +250,8 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz_student` (
   `student_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_quiz_student`
---
-
-INSERT INTO `tbl_quiz_student` (`id`, `quiz_code`, `topic_title`, `item_number`, `question`, `choice1`, `choice2`, `choice3`, `choice4`, `student_answer`, `correct_answer`, `student_id`) VALUES
-(76, '1234567', 'HTML', 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', 'Hypertext Marchup Language', 'Hypertext Maskup Language', 'Hypertext Markup Language', 9),
-(77, '1234567', 'HTML', 2, 'What language category is HTML?', 'Scripting language', 'Speaking language', 'Programming language', 'Computer language', 'Programming language', 'Computer language', 9),
-(78, '1234567', 'HTML', 3, 'HTML in a simple terms', 'Web Engineering', 'Web Architecture', 'Web Structure', 'Web Building', 'Web Architecture', 'Web Structure', 9),
-(79, '1234567', 'HTML', 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', 'Hypertext Marchup Language', 'Hypertext Maskup Language', 'Hypertext Markup Language', 14),
-(80, '1234567', 'HTML', 2, 'What language category is HTML?', 'Scripting language', 'Speaking language', 'Programming language', 'Computer language', 'Programming language', 'Computer language', 14),
-(81, '1234567', 'HTML', 3, 'HTML in a simple terms', 'Web Engineering', 'Web Architecture', 'Web Structure', 'Web Building', 'Web Architecture', 'Web Structure', 14),
-(82, '1234567', 'HTML', 1, 'HTML stands for?', 'Hypertext Maskup Language', 'Hypertext Makeup Language', 'Hypertext Markup Language', 'Hypertext Marchup Language', 'Hypertext Maskup Language', 'Hypertext Markup Language', 10),
-(83, '1234567', 'HTML', 2, 'What language category is HTML?', 'Scripting language', 'Speaking language', 'Programming language', 'Computer language', 'Programming language', 'Computer language', 10),
-(84, '1234567', 'HTML', 3, 'HTML in a simple terms', 'Web Engineering', 'Web Architecture', 'Web Structure', 'Web Building', 'Web Architecture', 'Web Structure', 10);
 
 -- --------------------------------------------------------
 
@@ -311,7 +274,8 @@ INSERT INTO `tbl_section` (`id`, `section`) VALUES
 (1, 'Hope'),
 (2, 'Faith'),
 (3, 'Love'),
-(4, 'null');
+(4, '');
+
 
 -- --------------------------------------------------------
 
@@ -329,25 +293,14 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
   `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `age` int NOT NULL,
-  `birthdate` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `phone_number` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `grade_level` int NOT NULL,
   `section` int NOT NULL,
   `img_url` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `grade_level` (`grade_level`),
   KEY `section` (`section`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_student`
---
-
-INSERT INTO `tbl_student` (`id`, `firstname`, `middlename`, `lastname`, `email`, `username`, `password`, `age`, `birthdate`, `phone_number`, `grade_level`, `section`, `img_url`) VALUES
-(9, 'Toto', 'E', 'Kent', 'kent@kent.com', 'kent', '564f10260067a9b0c8d8e206ecdb49c6', 28, 'Jul 4, 1995', '123456789', 3, 4, 'default.png'),
-(10, 'Teya', 'R', 'Gwapa', 'teya@teya.com', 'teya', '5a1ce036f6d0554f6f1a3ea126d92427', 18, 'February 04, 2005', '987654321', 3, 4, 'default.png'),
-(14, 'Test', '', 'Only', 'test@test.com', 'test', '098f6bcd4621d373cade4e832627b4f6', 0, '', '', 3, 4, 'default.png'),
-(15, '', '', '', 'sample@sample.com', 'sample', '5e8ff9bf55ba3508199d22e984129be6', 0, '', '', 3, 4, 'default.png');
 
 -- --------------------------------------------------------
 
@@ -364,7 +317,8 @@ CREATE TABLE IF NOT EXISTS `tbl_sub_topics` (
   `description` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -379,15 +333,12 @@ CREATE TABLE IF NOT EXISTS `tbl_teacher` (
   `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `img_url` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `firstname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `middlename` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `lastname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_teacher`
---
-
-INSERT INTO `tbl_teacher` (`id`, `username`, `password`, `email`, `img_url`) VALUES
-(1, '54321', '01cfcd4f6b8770febfb40cb906715822', 'test@test.com', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -402,30 +353,8 @@ CREATE TABLE IF NOT EXISTS `tbl_topics` (
   `teacher_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_topics`
---
-
-INSERT INTO `tbl_topics` (`id`, `topic_title`, `teacher_id`) VALUES
-(62, 'HTML', 1),
-(64, 'CSS', 1),
-(65, 'JS', 1),
-(66, 'Bootstrap', 1),
-(67, 'Tailwind', 1),
-(68, 'PHP', 1),
-(69, 'Laravel', 1),
-(70, 'Vue.js', 1),
-(71, 'React.js', 1),
-(76, 'Java', 1),
-(77, 'Springbot', 1),
-(78, 'Python', 1),
-(79, 'Django', 1),
-(80, 'C++', 1),
-(81, 'C#', 1),
-(82, 'Unity', 1),
-(83, 'Swift', 1);
 
 --
 -- Constraints for dumped tables

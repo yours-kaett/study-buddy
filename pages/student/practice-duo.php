@@ -2,10 +2,10 @@
 include '../../db-connection.php';
 session_start();
 if (($_SESSION['id'])) {
-    $session_id = $_SESSION['id'];
+    $userId = $_SESSION['id'];
     $topic_id = $_GET['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
-    $stmt->bind_param('i', $session_id);
+    $stmt->bind_param('i', $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     $rows = $result->fetch_assoc();
@@ -24,32 +24,6 @@ if (($_SESSION['id'])) {
         <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
         <link rel="icon" href="../../img/ICT-StudyBuddyLogo.png">
-        <style>
-            .background-waiting {
-                background-color: #0000008f;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                z-index: 1;
-            }
-
-            .waiting {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 350px;
-                background-color: #0000008f;
-                color: #fff;
-            }
-
-            .waiting p {
-                margin-top: 18px;
-                display: flex;
-                justify-content: center;
-                padding: 10px;
-            }
-        </style>
     </head>
 
     <body onload="loaderFunction()">
@@ -57,7 +31,7 @@ if (($_SESSION['id'])) {
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2">
                 <h4 class="fw-bolder mt-2">Challenge Mode</h4>
                 <a href="account.php">
-                    <img src="../../img/<?php echo $img_url ?>" alt="">
+                    <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
