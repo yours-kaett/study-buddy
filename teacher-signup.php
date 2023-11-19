@@ -12,48 +12,55 @@
     <link rel="icon" href="img/ICT-StudyBuddyLogo.ico">
 </head>
 
+<header>
+    <!-- success & error -->
+    <?php
+    if (isset($_GET['success'])) {
+    ?>
+        <div class="alert alert-primary alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
+            <span class="text-success"><?php echo $_GET['success'], "Account created successfully."; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    }
+    if (isset($_GET['taken'])) {
+    ?>
+        <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
+            <span class="text-secondary"><?php echo $_GET['taken'], "Username already taken."; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    }
+    if (isset($_GET['unknown'])) {
+    ?>
+        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
+            <span class="text-danger"><?php echo $_GET['unknown'], "Unknown error occured."; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    }
+    ?>
+</header>
+
 <body>
     <main>
         <div class="container starters min-vh-100">
-            <img src="img/ICT-StudyBuddyLogo.ico" width="150" alt="Study Buddy Logo">
+            <img src="img/ICT-StudyBuddyLogo.png" width="100" alt="Study Buddy Logo">
             <h3 class="fw-bold mt-4">Teacher</h3>
             <div class="card">
-                <!-- success & error -->
-                <?php
-                if (isset($_GET['success'])) {
-                ?>
-                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center mb-2" role="alert">
-                        <div>
-                            <?php echo $_GET['success']; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-                <?php
-                }
-                if (isset($_GET['error'])) {
-                ?>
-                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center mb-2" role="alert">
-                        <div>
-                            <?php echo $_GET['error']; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-                <?php
-                }
-                ?>
                 <form action="backend/teacher-signup-sanitize.php" method="POST" class="w-100">
                     <div class="w-100">
-                        <input type="email" name="email" placeholder="Email" class="starters-input mb-3 w-100 me-5 mt-2" required>
+                        <input type="email" name="email" placeholder="Email" class="starters-input mb-2 w-100 me-5 mt-2" required>
                     </div>
                     <div class="w-100">
-                        <input type="text" name="username" placeholder="Username" class="starters-input mb-3 w-100 me-5" required>
+                        <input type="text" name="username" placeholder="Username" class="starters-input mb-2 w-100 me-5" required>
                     </div>
                     <div class="w-100">
-                        <input type="password" name="password" placeholder="Password" class="starters-input mb-3 w-100 me-5" required>
+                        <input type="password" name="password" placeholder="Password" class="starters-input mb-2 w-100 me-5" required>
                     </div>
                     <div class="w-100">
                         <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
-                            <span id="create">Create &nbsp;<i class="bi bi-box-arrow-in-right"></i></span>
+                            <span id="create">Create</span>
                             <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </button>
                     </div>

@@ -25,18 +25,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
             if ($row['username'] === $username && $row['password'] === $password) {
-                
+
                 $_SESSION['id'] = $row['id'];
-                $_SESSION['username'] = $row['username'];
 
                 header("Location: ../pages/teacher/home.php");
                 exit();
             } else {
-                header("Location: ../teacher-login.php?error=Invalid username or password.");
+                header("Location: ../teacher-login.php?invalid");
                 exit();
             }
         } else {
-            header("Location: ../teacher-login.php?error=Invalid username or password.");
+            header("Location: ../teacher-login.php?invalid");
             exit();
         }
     } catch (Exception $e) {
@@ -44,6 +43,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit();
     }
 } else {
-    header("Location: ../teacher-login.php");
+    header("Location: ../teacher-login.php?unknown");
     exit();
 }

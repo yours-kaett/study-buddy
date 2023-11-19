@@ -3,10 +3,10 @@ include '../../db-connection.php';
 session_start();
 
 if (($_SESSION['id'])) {
-    $session_id = $_SESSION['id'];
+    $userId = $_SESSION['id'];
     $topic_id = $_GET['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
-    $stmt->bind_param('i', $session_id);
+    $stmt->bind_param('i', $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     $rows = $result->fetch_assoc();
@@ -31,7 +31,7 @@ if (($_SESSION['id'])) {
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
                 <h4 class="fw-bolder mt-2">ICT Topics</h4>
                 <a href="account.php">
-                    <img src="../../img/<?php echo $img_url ?>" alt="">
+                    <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
@@ -109,7 +109,7 @@ if (($_SESSION['id'])) {
                                             </p>';
 
                                         $stmt = $conn->prepare(' SELECT id, img_url, firstname, middlename, lastname  FROM tbl_student WHERE id <> ? ');
-                                        $stmt->bind_param('i', $session_id);
+                                        $stmt->bind_param('i', $userId);
                                         $stmt->execute();
                                         $student_result = $stmt->get_result();
                                         while ($student_row = $student_result->fetch_assoc()) {

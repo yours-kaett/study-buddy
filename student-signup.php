@@ -20,21 +20,31 @@
             <div class="card">
                 <!-- success & error -->
                 <?php
-                if (isset($_GET['success'])) {
+                if (isset($_GET['taken'])) {
                 ?>
-                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center mb-2" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center mb-2 w-100" role="alert">
                         <div>
-                            <?php echo $_GET['success']; ?>
+                            <?php echo $_GET['taken'], "Username already taken."; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                 <?php
                 }
-                if (isset($_GET['error'])) {
+                if (isset($_GET['success'])) {
                 ?>
-                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center mb-2" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center mb-2 w-100" role="alert">
                         <div>
-                            <?php echo $_GET['error']; ?>
+                            <?php echo $_GET['success'], "Account created successfully."; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                <?php
+                }
+                if (isset($_GET['unknown'])) {
+                ?>
+                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center mb-2 w-100" role="alert">
+                        <div>
+                            <?php echo $_GET['unknown'], "Unknown error occured."; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
@@ -53,7 +63,7 @@
                     </div>
                     <div class="w-100">
                         <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
-                            <span id="create">Create &nbsp;<i class="bi bi-box-arrow-in-right"></i></span>
+                            <span id="create">Create</span>
                             <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </button>
                     </div>

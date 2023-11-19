@@ -4,6 +4,12 @@ session_start();
 
 if ($_SESSION['id']) {
     $userId = $_SESSION['id'];
+    $stmt = $conn->prepare(' SELECT * FROM tbl_teacher WHERE id = ? ');
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = $result->fetch_assoc();
+    $img_url = $rows['img_url'];
 ?>
 
     <!DOCTYPE html>
@@ -15,7 +21,7 @@ if ($_SESSION['id']) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
-        <link rel="stylesheet" href="../../bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
         <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
     </head>
@@ -23,20 +29,9 @@ if ($_SESSION['id']) {
     <body>
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-                <a href="topics.php" class="">
-                    <i class="bi bi-arrow-left fs-2"></i>
-                </a>
-                <div></div>
-                <a href="#">
-                    <?php
-                    $stmt = $conn->prepare(' SELECT * FROM tbl_teacher WHERE id = ? ');
-                    $stmt->bind_param('i', $userId);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $row = $result->fetch_assoc();
-                    $image = $row['img_url'];
-                    echo '<img src="../../img/' . $image . '" width="40" alt="Profile"> ';
-                    ?>
+                <h4 class="fw-bolder mt-2">Topics</h4>
+                <a href="account.php">
+                    <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
@@ -96,22 +91,22 @@ if ($_SESSION['id']) {
         <footer>
             <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-3">
                 <a href="home.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-house fs-5 fw-bolder"></i>
+                    <i class="bx bx-home-alt fs-3 fw-bolder"></i>
                     Home
                 </a>
                 <a href="topics.php" class="d-flex flex-column align-items-center" style="color: #3552a1">
-                    <i class="bi bi-collection-fill fs-5 fw-bolder"></i>
+                    <i class="bx bxs-collection fs-3 fw-bolder"></i>
                     Topics
                 </a>
                 <a href="add-topic.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-patch-plus fs-1"></i>
+                    <i class="bx bx-layer-plus fw-bolder" style="font-size: 40px;"></i>
                 </a>
-                <a href="#" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-grid-3x3-gap fs-5 fw-bolder"></i>
+                <a href="setup-quiz.php" class="d-flex flex-column align-items-center">
+                    <i class="bx bx-pencil fs-3 fw-bolder"></i>
                     Setup Quiz
                 </a>
                 <a href="#" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-people fs-5 fw-bolder"></i>
+                    <i class="bx bx-group fs-3 fw-bolder"></i>
                     Students
                 </a>
             </div>

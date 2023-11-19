@@ -25,19 +25,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
             if ($row['username'] === $username && $row['password'] === $password) {
-                
+
                 $_SESSION['id'] = $row['id'];
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['img_url'] = $row['img_url'];
 
                 header("Location: ../pages/student/home.php");
                 exit();
             } else {
-                header("Location: ../student-login.php?error=Invalid username or password.");
+                header("Location: ../student-login.php?invalid");
                 exit();
             }
         } else {
-            header("Location: ../student-login.php?error=Invalid username or password.");
+            header("Location: ../student-login.php?invalid");
             exit();
         }
     } catch (Exception $e) {
@@ -45,6 +43,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit();
     }
 } else {
-    header("Location: ../student-login.php");
+    header("Location: ../student-login.php?unknown");
     exit();
 }

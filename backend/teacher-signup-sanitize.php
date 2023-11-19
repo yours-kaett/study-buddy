@@ -15,6 +15,10 @@ if ( isset($_POST['email']) && isset($_POST['username']) && isset($_POST['passwo
     $email = validate($_POST['email']);
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
+    $firstname = 'empty-fn';
+    $middlename = 'empty-mn';
+    $lastname = 'empty-ln';
+    $img_url = 'default.png';
 
     $stmt = $conn->prepare(" SELECT * FROM tbl_teacher WHERE username = ? ");
     $stmt->bind_param("s", $username);
@@ -22,20 +26,20 @@ if ( isset($_POST['email']) && isset($_POST['username']) && isset($_POST['passwo
     $result = $stmt->get_result();
 
     if (mysqli_num_rows($result) > 0) {
-        header("Location: ../teacher-signup.php?error=Username already taken.");
+        header("Location: ../teacher-signup.php?taken");
         exit();
     } else {
         
         $password = md5($password);
-        $stmt = $conn->prepare("INSERT INTO tbl_teacher (email, username, password) 
-        VALUES (?, ?, ?) ");
-        $stmt->bind_param('sss', $email, $username, $password);
+        $stmt = $conn->prepare("INSERT INTO tbl_teacher (firstname, middlename, lastname, email, username, password, img_url) 
+        VALUES (?, ?, ?, ?, ?, ?, ?) ");
+        $stmt->bind_param('sssssss', $firstname, $middlename, $lastname, $email, $username, $password, $img_url);
         $stmt->execute();
         $result = $stmt->get_result();
-        header("Location: ../teacher-signup.php?success=Account created successfully.");
+        header("Location: ../teacher-signup.php?success");
         exit();
     }
 } else {
-    header("Location: ../teacher-signup.php?error=Unknown error occured.");
+    header("Location: ../teacher-signup.php?unknown");
     exit();
 }

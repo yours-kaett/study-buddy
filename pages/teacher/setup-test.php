@@ -3,6 +3,12 @@ include '../../db-connection.php';
 session_start();
 if ($_SESSION['id']) {
     $userId = $_SESSION['id'];
+    $stmt = $conn->prepare(' SELECT * FROM tbl_teacher WHERE id = ? ');
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = $result->fetch_assoc();
+    $img_url = $rows['img_url'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -13,7 +19,7 @@ if ($_SESSION['id']) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
-        <link rel="stylesheet" href="../../bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
         <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
     </head>
@@ -21,17 +27,9 @@ if ($_SESSION['id']) {
     <body>
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-                <h4 class="fw-bolder mt-2">Setup Test</h4>
-                <a href="#">
-                    <?php
-                    $stmt = $conn->prepare(' SELECT * FROM tbl_teacher WHERE id = ? ');
-                    $stmt->bind_param('i', $userId);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $row = $result->fetch_assoc();
-                    $image = $row['img_url'];
-                    echo '<img src="../../img/' . $image . '" width="40" alt="Profile"> ';
-                    ?>
+                <h4 class="fw-bolder mt-2">Topics</h4>
+                <a href="account.php">
+                    <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
@@ -113,22 +111,22 @@ if ($_SESSION['id']) {
         <footer>
             <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-3">
                 <a href="home.php" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-house fs-5 fw-bolder"></i>
+                    <i class="bx bx-home-alt fs-3 fw-bolder"></i>
                     Home
                 </a>
                 <a href="topics.php" class="d-flex flex-column align-items-center" style="color: #3552a1">
-                    <i class="bi bi-collection-fill fs-5 fw-bolder"></i>
+                    <i class="bx bxs-collection fs-3 fw-bolder"></i>
                     Topics
                 </a>
-                <a href="#" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-patch-plus fs-1"></i>
+                <a href="add-topic.php" class="d-flex flex-column align-items-center">
+                    <i class="bx bx-layer-plus fw-bolder" style="font-size: 40px;"></i>
                 </a>
-                <a href="#" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-grid-3x3-gap fs-5 fw-bolder"></i>
+                <a href="setup-quiz.php" class="d-flex flex-column align-items-center">
+                    <i class="bx bx-pencil fs-3 fw-bolder"></i>
                     Setup Quiz
                 </a>
                 <a href="#" class="d-flex flex-column align-items-center">
-                    <i class="bi bi-people fs-5 fw-bolder"></i>
+                    <i class="bx bx-group fs-3 fw-bolder"></i>
                     Students
                 </a>
             </div>
@@ -186,17 +184,6 @@ if ($_SESSION['id']) {
     </body>
 
     </html>
-
-    <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt quam omnis distinctio reiciendis, eius voluptatibus? Cum ex officia unde optio ab. Dicta cupiditate ipsam accusamus alias rem et nisi iste.
-    Accusantium perferendis dicta rem, tempore iure sunt eius vero, magnam veritatis tempora, error quo iusto! Neque excepturi beatae nobis cupiditate nesciunt placeat, officiis non, totam sed, ex consectetur temporibus eveniet.
-    Sit itaque laboriosam at nihil quasi vel explicabo temporibus iusto vitae tenetur, consequatur sequi non fugit, soluta tempore amet autem. Rem ex ab id commodi, quos ea blanditiis enim velit!
-    Ex at minima nemo totam incidunt omnis vel magni, non illo. Laborum dolor quibusdam voluptas accusantium id libero earum minima, odit in architecto amet at unde nesciunt aliquam? Harum, consequatur.
-    Earum nihil unde natus? Excepturi, repudiandae. Voluptatum quasi iure aperiam! Quaerat, velit deserunt. Quam aliquam repudiandae tenetur molestias maxime animi ex consectetur autem? Maiores delectus adipisci tempora, deserunt facilis unde.
-    Tenetur laboriosam, doloremque dolor minima tempore laudantium. Cum facilis eius itaque, pariatur suscipit ut voluptatem illo mollitia? Reprehenderit, nostrum non atque magnam officia tenetur doloremque provident, ipsam eius totam dicta.
-    Doloremque, dolorum consequatur voluptatum enim nam vero eius omnis maxime praesentium, molestiae, reprehenderit impedit fuga beatae repudiandae molestias neque explicabo laborum autem tenetur. Assumenda aperiam vel, reiciendis corporis iusto blanditiis!
-    Explicabo doloremque fugit quod id debitis aperiam officia odit. Laboriosam iure iusto nemo, deleniti tempora quidem non tenetur excepturi optio deserunt voluptate quas cum modi repudiandae praesentium illo laudantium velit!
-    Fuga iure odio hic reprehenderit debitis perspiciatis nisi corporis sequi placeat perferendis deserunt quibusdam eaque quis, consectetur molestias soluta asperiores tenetur similique? Magni similique sequi quae, qui dolor molestiae voluptate?
-    Nostrum quo nesciunt corporis culpa laborum aspernatur porro hic quaerat eligendi provident. At perspiciatis aliquam, tempore hic eligendi necessitatibus rem nobis expedita totam harum architecto quisquam reprehenderit ut. Necessitatibus, cum.</p> -->
 
 <?php
 } else {

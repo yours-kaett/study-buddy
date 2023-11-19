@@ -7,9 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         return htmlspecialchars(trim($data));
     }
+    $userId = $_SESSION['id'];
     $topic_title = validate($_POST['topic_title']);
 
-    $stmt = $conn->prepare("SELECT id FROM tbl_topics WHERE topic_title = ?");
+    $stmt = $conn->prepare("SELECT id, topic_title FROM tbl_topics WHERE topic_title = ?");
     $stmt->bind_param("s", $topic_title);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -18,8 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../pages/teacher/add-topic.php?error=Topic title already exist.");
         exit();
     } else {
-        $stmt = $conn->prepare("INSERT INTO tbl_topics (topic_title) VALUES (?)");
-        $stmt->bind_param('s', $topic_title);
+
+        $stmt = $conn->prepare("INSERT INTO tbl_topics (topic_title, teacher_id) VALUES (?, ?)");
+        $stmt->bind_param('si', $topic_title, $userId);
         $stmt->execute();
         $topic_id = $stmt->insert_id;
 
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param('iiss', $topic_id, $lesson_number, $sub_topic_title, $description);
             $stmt->execute();
             if ($stmt->error) {
-                header("Location: ../pages/teacher/topics.php?error=Error inserting sub-topic data.");
+                header("Location: ../pages/teacher/add-topic.php?error");
                 exit();
             }
             $rowCounter++;
