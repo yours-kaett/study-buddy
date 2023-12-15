@@ -56,7 +56,34 @@ if (isset($_SESSION['id'])) {
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="bx bx-bell fs-3"></i>&nbsp; Notifications
                                 </span>
-                                <span class="position-absolute"></span>
+                                <!-- <span class="position-absolute"></span> -->
+                                <?php
+                                $notifications = 0;
+                                $invite_status_id = 2;
+                                $stmt = $conn->prepare(' SELECT * FROM tbl_invite_practice WHERE invite_to = ? AND invite_status_id = ?');
+                                $stmt->bind_param('ii', $_SESSION['id'], $invite_status_id);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                $rows = $result->fetch_assoc();
+
+                                $notifications = $notifications + mysqli_num_rows($result);
+                                echo '
+                                        <span class="home-notifications" id="home-notifications">' . $notifications . '</span>
+                                    ';
+                                if ($notifications === 0) {
+                                    echo '
+                                        <script>
+                                            document.getElementById("home-notifications").style.display = "none";
+                                        </script>
+                                    ';
+                                } else {
+                                    echo '
+                                        <script>
+                                            document.getElementById("home-notifications").style.display = "flex";
+                                        </script>
+                                    ';
+                                }
+                                ?>
                             </button>
                         </a>
                     </div>

@@ -103,13 +103,13 @@ if (($_SESSION['id'])) {
                                     <h6>Score Attained</h6>
                                     <h3>' . $score . ' out of ' . $total_items . '</h3>
                                     <h3 class="mt-3" style="color: #e6ca2d;">
-                                        <i class="bx bx-star-fill"></i>
-                                        <i class="bx bx-star-fill"></i>
-                                        <i class="bx bx-star-fill"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
                                         <strong>PERFECT</strong>
-                                        <i class="bx bx-star-fill"></i>
-                                        <i class="bx bx-star-fill"></i>
-                                        <i class="bx bx-star-fill"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
+                                        <i class="bx bxs-star"></i>
                                     </h3>
                                 </div>
                             </div>
@@ -155,6 +155,14 @@ if (($_SESSION['id'])) {
                         }
 
                         echo "<h6>Opponent's Score: <span class='fs-3'>$opponent_score</span></h6>";
+                        echo '
+                            <a href="topics.php">
+                                <button class="btn btn-primary btn-sm d-flex align-items-center mt-3">
+                                    <i class="bx bx-left-arrow-alt fs-5"></i>
+                                    &nbsp;Back to Topics
+                                </button>
+                            </a>
+                        ';
 
                         $practice_status_id = 2;
                         $stmt = $conn->prepare(' UPDATE tbl_invite_practice SET practice_status_id = ? WHERE room_id = ? ');
@@ -164,10 +172,6 @@ if (($_SESSION['id'])) {
                         $stmt->close();
 
                         ?>
-                        <a href="topics.php" class="btn btn-outline-success btn-sm d-flex align-items-center fixed-bottom ms-3 mb-5" style="margin-bottom: 70px !important; width: 140px;">
-                            <i class="bx bx-left-arrow-alt fs-5"></i>
-                            &nbsp;Back to Topics
-                        </a>
                     </div>
                 </div>
             </div>
@@ -177,19 +181,19 @@ if (($_SESSION['id'])) {
             <div class="d-flex align-items-center justify-content-between fixed-bottom px-5">
                 <a href="home.php" class="d-flex flex-column align-items-center mt-2">
                     <i class="bx bx-home-alt fs-3 fw-bolder"></i>
-                    Home
+                    <span class="fw-bold">Home</span>
                 </a>
                 <a href="#" class="d-flex flex-column align-items-center mt-2" style="color: #3552a1;">
                     <i class="bx bxs-collection fs-3 fw-bolder"></i>
-                    Topics
+                    <span class="fw-bold">Topics</span>
                 </a>
                 <a href="quiz-code-input.php" class="d-flex flex-column align-items-center mt-2">
                     <i class="bx bx-pencil fs-3 fw-bolder"></i>
-                    Quiz
+                    <span class="fw-bold">Quiz</span>
                 </a>
                 <a href="notifications.php" class="d-flex flex-column align-items-center mt-2">
                     <i class="bx bx-bell fs-3 fw-bolder"></i>
-                    <span>Notifications
+                    <span class="fw-bold">Notifications
                         <?php
                         $notifications = 0;
                         $invite_status_id = 2;

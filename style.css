@@ -295,7 +295,7 @@ footer div a {
     margin-bottom: 5px;
 }
 
-footer .notifications {
+.notifications {
     position: absolute;
     padding-left: 4.5px;
     padding-right: 4.5px;
@@ -308,4 +308,18 @@ footer .notifications {
     border-radius: 50%;
     bottom: 35px;
     right: 60px;
+}
+.home-notifications {
+    position: absolute;
+    padding-left: 4.5px;
+    padding-right: 4.5px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    font-size: 8px;
+    background-color: var(--red-color);
+    color: #fff;
+    border: 2px solid #bbfde8;
+    border-radius: 50%;
+    bottom: 80px;
+    left: 20px;
 }

@@ -105,19 +105,19 @@ if ($_SESSION['id']) {
             <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
                 <a href="home.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-home-alt fs-3 fw-bolder"></i>
-                    Home
+                    <span class="fw-bold">Home</span>
                 </a>
                 <a href="topics.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-collection fs-3 fw-bolder"></i>
-                    Topics
+                    <span class="fw-bold">Topics</span>
                 </a>
                 <a href="quiz-code-input.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-pencil fs-3 fw-bolder"></i>
-                    Quiz
+                    <span class="fw-bold">Quiz</span>
                 </a>
                 <a href="notifications.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
                     <i class="bx bxs-bell fs-3 fw-bolder"></i>
-                    <span>Notifications
+                    <span class="fw-bold">Notifications
                         <?php
                         $notifications = 0;
                         $invite_status_id = 2;
