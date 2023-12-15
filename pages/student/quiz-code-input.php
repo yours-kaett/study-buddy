@@ -68,6 +68,18 @@ if ($_SESSION['id']) {
                             </div>
                         <?php
                         }
+                        if (isset($_GET['notfound'])) {
+                        ?>
+                            <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center mb-2" role="alert">
+                                <div>
+                                    <?php echo $_GET['notfound'], "Quiz code not found."; ?>
+                                    <a href="quiz-code-input.php">
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php
+                        }
                         ?>
                         <form action="../../backend/quiz-code-sanitize.php" method="POST" class="w-100 mb-4 mt-4">
                             <div class="row mb-3">
@@ -102,19 +114,19 @@ if ($_SESSION['id']) {
             <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
                 <a href="home.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-home-alt fs-3 fw-bolder"></i>
-                    Home
+                    <span class="fw-bold">Home</span>
                 </a>
                 <a href="topics.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-collection fs-3 fw-bolder"></i>
-                    Topics
+                    <span class="fw-bold">Topics</span>
                 </a>
                 <a href="quiz-code-input.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
                     <i class="bx bxs-pencil fs-3 fw-bolder"></i>
-                    Quiz
+                    <span class="fw-bold">Quiz</span>
                 </a>
                 <a href="notifications.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-bell fs-3 fw-bolder"></i>
-                    <span>Notifications
+                    <span class="fw-bold">Notifications
                         <?php
                         $notifications = 0;
                         $invite_status_id = 2;
