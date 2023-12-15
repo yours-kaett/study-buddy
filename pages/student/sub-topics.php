@@ -29,7 +29,7 @@ if (isset($_SESSION['id'])) {
 
     <body onload="generateRoomID()">
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
                 <h4 class="fw-bolder mt-2">ICT Topics</h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
@@ -37,9 +37,9 @@ if (isset($_SESSION['id'])) {
             </div>
         </header>
         <main>
-            <div class="container topic">
-                <div class="card">
-                    <div class="card-body">
+            <div class="container topic mt-5 mb-3">
+                <div class="card mb-5">
+                    <div class="card-body p-5">
                         <?php
                         if (isset($_GET['success'])) {
                         ?>
@@ -59,7 +59,7 @@ if (isset($_SESSION['id'])) {
                         $rows = $result->fetch_assoc();
                         $topic_title = $rows['topic_title'];
                         echo '
-                            <h5>Topic: ' . $topic_title . ' </h5>
+                            <h5 class="fw-bold">Topic: ' . $topic_title . ' </h5>
                         ';
 
                         $stmt = $conn->prepare('SELECT 
@@ -84,18 +84,32 @@ if (isset($_SESSION['id'])) {
                             </div>
                             ';
                         }
-                        echo '
+                        if (mysqli_num_rows($result) == 0) {
+                            echo "<div class='d-flex align-items-center flex-column mt-5 pt-5'>
+                                    <i class='bx bx-task-x text-secondary' style='font-size: 80px;'></i>
+                                    <h6 class='text-secondary fw-bold mt-3'>There's no discussion here.</h6>
+                                    <h6 class='text-secondary fw-bold mt-1'>You can go back here soon.</h6>
+                                    <a href='topics.php' class='mt-3'>
+                                        <button class='btn btn-outline-success border-2 d-flex align-items-center fw-bold'>
+                                            <i class='bx bx-left-arrow-alt fs-5'></i>
+                                            Back to Topics
+                                        </button>
+                                    </a>
+                                </div>";
+                        } else {
+                            echo '
                             <a href="practice.php?id=' . $topic_id . '">
-                                <button type="button" class="btn-login w-100 mb-2">Self practice</button>
+                                <button type="button" class="btn-login w-100 mb-2 fw-bold">Self practice</button>
                             </a>
-                            <button type="button" class="btn-login w-100" data-bs-toggle="modal" data-bs-target="#inviteModal">Challenge a friend</button>
+                            <button type="button" class="btn-login w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#inviteModal">Challenge a friend</button>
                         ';
+                        }
                         ?>
                         <div class="modal fade" id="inviteModal" tabindex="-1" aria-labelledby="inviteModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="inviteModalLabel">Challenge a friend</h1>
+                                        <h1 class="modal-title fs-5 fw-bold" id="inviteModalLabel">Challenge a friend</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -104,7 +118,7 @@ if (isset($_SESSION['id'])) {
                                         echo '
                                             <p>Room ID:
                                                 <span>
-                                                    <input name="room_id" id="roomID" type="text" style="background-color: transparent; border: none; outline: none;" readonly />
+                                                    <input name="room_id" id="roomID" class="fw-bold" type="text" style="background-color: transparent; border: none; outline: none;" readonly />
                                                 </span>
                                             </p>';
                                         $stmt = $conn->prepare('SELECT * FROM tbl_student WHERE id <> ?');
@@ -165,7 +179,6 @@ if (isset($_SESSION['id'])) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -184,7 +197,6 @@ if (isset($_SESSION['id'])) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

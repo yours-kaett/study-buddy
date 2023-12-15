@@ -48,63 +48,7 @@ h6 {
     font-family: "Nunito", sans-serif;
 }
 
-
-.intro {
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.intro .card {
-    border: none !important;
-    border-radius: 10px;
-    background-color: transparent !important;
-}
-
-.intro .img-container {
-    display: flex;
-    align-items: center;
-}
-
-.intro .card img {
-    width: 320px;
-    border: 1px solid var(--primary-color)
-}
-
-.intro .card .btn-getstarted {
-    border: 0;
-    border-radius: 15px;
-    padding: 10px;
-    background-color: var(--secondary-color);
-    color: var(--white-color);
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.intro .card .btn-signout {
-    border: 1px solid var(--primary-color);
-    border-radius: 15px;
-    padding: 10px;
-    background-color: transparent;
-    color: var(--primary-color);
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.intro .card a {
-    margin-bottom: 10px;
-    text-align: left !important;
-}
-
-.intro .card a i {
-    font-size: 25px;
-    font-weight: bolder;
-}
-
-/*  */
+/* STARTERS  */
 
 .starters {
     display: flex;
@@ -133,10 +77,11 @@ h6 {
 
 .starters form .starters-input {
     border: none;
+    border-bottom: 1px solid var(--primary-color);
     outline: none;
     padding: 12px;
-    border-radius: 5px;
-    width: 200px;
+    background-color: transparent;
+        color: var(--primary-color);
 }
 
 /* TOPIC */
@@ -196,17 +141,6 @@ h6 {
 
 /* BUTTONS */
 
-.btn-take-quiz {
-    border: 0;
-    border-radius: 15px;
-    background-color: var(--tertiary-color);
-    color: var(--white-color);
-    font-weight: bold;
-    font-size: 18px;
-    width: 100%;
-    padding: 8px;
-}
-
 .btn-a {
     border: 0;
     border-radius: 15px;
@@ -215,8 +149,13 @@ h6 {
     color: var(--white-color);
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
-}
+    font-size: 16px;
+    }
+    
+    .btn-a:hover {
+        background-color: var(--tertiary-color);
+        transition: 0.5s;
+    }
 
 .btn-b {
     border: 0;
@@ -226,30 +165,97 @@ h6 {
     color: var(--white-color);
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
+    }
+    
+    .btn-b:hover {
+        background-color: var(--tertiary-color);
+        transition: 0.5s;
 }
 
 .btn-login {
     border: 0;
-    border-radius: 15px;
+    border-radius: 30px;
     padding: 10px;
     background-color: var(--tertiary-color);
-    color: var(--white-color);
     text-align: center;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
+        width: 100%;
+        color: #cccccc;
+        cursor: not-allowed;
+    }
+    
+    .btn-login:hover {
+        background-color: var(--secondary-color);
 }
 
 .btn-reset {
     border: 1px solid var(--red-color);
-    border-radius: 15px;
+    border-radius: 30px;
     padding: 10px;
     background-color: transparent;
     color: var(--red-color);
     text-align: center;
     font-weight: bold;
-    font-size: 18px;
-}
+    font-size: 16px;
+        width: 100%;
+    }
+    
+    /* OTHERS */
+    
+    .background-waiting {
+        background-color: #0000008f;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+    }
+    
+    .waiting {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 350px;
+        background-color: #0000008f;
+        color: #fff;
+    }
+    
+    .waiting p {
+        margin-top: 18px;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+    
+    #loading {
+        display: none;
+    }
+    
+    #loading .bi-gear {
+        animation: spin 2s linear infinite;
+    }
+    
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+    
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+    
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 
 /* TABLE */
 
@@ -282,6 +288,7 @@ h6 {
     justify-content: center;
     padding: 10px;
 }
+
 
 /* FOOTER */
 

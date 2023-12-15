@@ -93,8 +93,8 @@ if ($_SESSION['id']) {
                     <p>Waiting for opponent...</p>
                 </section>
             </section>
-            <div class="container practice">
-                <div class="card">
+            <div class="container practice mt-5 mb-3">
+                <div class="card mb-5">
                     <div class="card-body">
                         <form action="../../backend/practice-duo-submit.php?id=<?php echo $room_id ?>" method="POST">
                             <?php
@@ -109,7 +109,7 @@ if ($_SESSION['id']) {
                             $result = $stmt->get_result();
                             $rows = $result->fetch_assoc();
                             echo '
-                                <h5 class="mb-5">Topic: ' . $rows['topic_title'] . ' </h5>
+                                <h5 class="fw-bold mb-5 mt-3 ">Topic: ' . $rows['topic_title'] . ' </h5>
                             ';
 
                             $stmt = $conn->prepare(' SELECT * FROM tbl_practice_duo WHERE topic_id = ? AND student_id = ? ');
@@ -199,7 +199,6 @@ if ($_SESSION['id']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -218,7 +217,6 @@ if ($_SESSION['id']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

@@ -60,7 +60,7 @@ if ($_SESSION['id']) {
         </main>
 
         <footer>
-            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
+            <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5 border">
                 <a href="home.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-home-alt fs-3 fw-bolder"></i>
                     <span class="fw-bold">Home</span>

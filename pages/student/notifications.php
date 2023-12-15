@@ -126,7 +126,6 @@ if ($_SESSION['id']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -145,7 +144,6 @@ if ($_SESSION['id']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>

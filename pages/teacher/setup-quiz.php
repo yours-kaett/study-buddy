@@ -68,11 +68,11 @@ if ($_SESSION['id']) {
                             <div class="row mb-3">
                                 <div class="col-lg-3">
                                     <label>Quiz Code</label>
-                                    <input type="text" name="quiz_code" placeholder="Type here" class="starters-input w-100 mb-2" required>
+                                    <input type="text" name="quiz_code" placeholder="Type here" class="form-control w-100 mb-2" required>
                                 </div>
                                 <div class="col-lg-9">
                                     <label>Topic title</label>
-                                    <input type="text" name="topic_title" placeholder="Type here" class="starters-input w-100" required>
+                                    <input type="text" name="topic_title" placeholder="Type here" class="form-control w-100" required>
                                 </div>
                                 <div class="col-lg-12">
                                     <label>Direction</label>
@@ -81,7 +81,7 @@ if ($_SESSION['id']) {
                             </div>
                             <hr>
                             <div id="rows-container"></div>
-                            <button class="btn btn-primary" id="addRow" type="button">
+                            <button class="btn btn-primary btn-sm" id="addRow" type="button">
                                 <i class="bi bi-plus-lg"></i>&nbsp; Add
                             </button>
                             <div class="w-100 mt-5">
@@ -135,31 +135,31 @@ if ($_SESSION['id']) {
                     newRow.innerHTML = `
                         <div class="col-lg-2">
                             <label>Item #</label>
-                            <input type="number" name="item_number_${rowCounter}" value="${itemNumber++}" placeholder="Type here" class="starters-input mb-2 w-100" readonly>
+                            <input type="number" name="item_number_${rowCounter}" value="${itemNumber++}" placeholder="Type here" class="form-control mb-2 w-100" readonly>
                         </div>
                         <div class="col-lg-10">
                             <label>Question</label>
-                            <input type="text" name="question_${rowCounter}" placeholder="Type here" class="starters-input mb-2 w-100" required>
+                            <input type="text" name="question_${rowCounter}" placeholder="Type here" class="form-control mb-2 w-100" required>
                         </div>
                         <div class="col-lg-6">
                             <label>Choice 1</label>
-                            <input type="text" name="choice1_${rowCounter}" placeholder="Type here" class="starters-input mb-2 w-100" required>
+                            <input type="text" name="choice1_${rowCounter}" placeholder="Type here" class="form-control mb-2 w-100" required>
                         </div>
                         <div class="col-lg-6">
                             <label>Choice 2</label>
-                            <input type="text" name="choice2_${rowCounter}" placeholder="Type here" class="starters-input mb-2 w-100" required>
+                            <input type="text" name="choice2_${rowCounter}" placeholder="Type here" class="form-control mb-2 w-100" required>
                         </div>
                         <div class="col-lg-6">
                             <label>Choice 3</label>
-                            <input type="text" name="choice3_${rowCounter}" placeholder="Type here" class="starters-input mb-2 w-100" required>
+                            <input type="text" name="choice3_${rowCounter}" placeholder="Type here" class="form-control mb-2 w-100" required>
                         </div>
                         <div class="col-lg-6">
                             <label>Choice 4</label>
-                            <input type="text" name="choice4_${rowCounter}" placeholder="Type here" class="starters-input mb-2 w-100" required>
+                            <input type="text" name="choice4_${rowCounter}" placeholder="Type here" class="form-control mb-2 w-100" required>
                         </div>
                         <div class="col-lg-12 mb-2">
                             <label>Correct answer</label>
-                            <input type="text" name="correct_answer_${rowCounter}" placeholder="Type here" class="starters-input w-100" required>
+                            <input type="text" name="correct_answer_${rowCounter}" placeholder="Type here" class="form-control w-100" required>
                             <hr>
                         </div>
                     `;

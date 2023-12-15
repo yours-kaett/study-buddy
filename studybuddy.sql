@@ -131,6 +131,7 @@ CREATE TABLE IF NOT EXISTS `tbl_practice` (
   KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +155,7 @@ CREATE TABLE IF NOT EXISTS `tbl_practice_duo` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`),
   KEY `student_id` (`student_id`)
+
 ) ENGINE=MyISAM AUTO_INCREMENT=437 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -225,6 +227,7 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz` (
   KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -249,6 +252,7 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz_student` (
   KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -271,6 +275,7 @@ INSERT INTO `tbl_section` (`id`, `section`) VALUES
 (2, 'Faith'),
 (3, 'Love'),
 (4, '');
+
 
 -- --------------------------------------------------------
 
@@ -296,6 +301,7 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
   KEY `section` (`section`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -312,6 +318,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sub_topics` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -332,6 +339,7 @@ CREATE TABLE IF NOT EXISTS `tbl_teacher` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -346,6 +354,7 @@ CREATE TABLE IF NOT EXISTS `tbl_topics` (
   PRIMARY KEY (`id`),
   KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Constraints for dumped tables

@@ -35,8 +35,8 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
-            <div class="container practice">
-                <div class="card p-2">
+            <div class="container practice mt-5 mb-3">
+                <div class="card mb-5">
                     <div class="card-body">
                         <form action="../../backend/quiz-submit.php?id=<?php echo $_GET['id'] ?>" method="POST">
                             <?php
@@ -58,8 +58,8 @@ if ($_SESSION['id']) {
                                 $direction = $rows['direction'];
                                 $topic_title = $rows['topic_title'];
                                 echo '
-                                <h6>Direction: ' . $direction . '</h6>
-                                <h6 class="mt-3 mb-5">Topic: <strong>' . $topic_title . '</strong></h6>
+                                <h6>Direction: <span class="fw-bold">' . $direction . '</span></h6>
+                                <h6 class="mt-3 mb-5">Topic: <span class="fw-bold">' . $topic_title . '</span></h6>
                             ';
                                 $stmt = $conn->prepare(' SELECT * FROM tbl_quiz_student WHERE quiz_code = ? AND student_id = ? ');
                                 $stmt->bind_param('ii', $_GET['id'], $_SESSION['id']);
@@ -112,10 +112,10 @@ if ($_SESSION['id']) {
                                     $student_answer = $rows['student_answer'];
 
                                     echo '
-                                <h6>' . $item_number . ". " . $question . '</h6>
+                                <h6 class="fw-bold">' . $item_number . ". " . $question . '</h6>
                                 <fieldset class="row mb-4 mt-3">
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option1_' . $item_number . '" value="' . $choice1 . '" required>
                                             <label class="form-check-label" for="option1_' . $item_number . '">
                                                 ' . $choice1 . '
@@ -123,7 +123,7 @@ if ($_SESSION['id']) {
                                         </div>
                                     </div3
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option2_' . $item_number . '" value="' . $choice2 . '" required>
                                             <label class="form-check-label" for="option2_' . $item_number . '">
                                                 ' . $choice2 . '
@@ -131,7 +131,7 @@ if ($_SESSION['id']) {
                                         </div>
                                     </div3
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option3_' . $item_number . '" value="' . $choice3 . '" required>
                                             <label class="form-check-label" for="option3_' . $item_number . '">
                                                 ' . $choice3 . '
@@ -139,7 +139,7 @@ if ($_SESSION['id']) {
                                         </div>
                                     </div3
                                     <div class="col-sm-10">
-                                        <div class="form-check mb-2">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option4_' . $item_number . '" value="' . $choice4 . '" required>
                                             <label class="form-check-label" for="option4_' . $item_number . '">
                                                 ' . $choice4 . '
@@ -192,7 +192,6 @@ if ($_SESSION['id']) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         $rows = $result->fetch_assoc();
-
                         $notifications = $notifications + mysqli_num_rows($result);
                         echo '
                                 <span class="notifications" id="notifications">' . $notifications . '</span>
@@ -211,7 +210,6 @@ if ($_SESSION['id']) {
                             ';
                         }
                         ?>
-
                     </span>
                 </a>
             </div>
