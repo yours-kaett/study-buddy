@@ -35,6 +35,8 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <?php
             $room_id = $_GET['id'];
 
