@@ -6,11 +6,9 @@ if (isset($_SESSION['id'])) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $invite_to = $_POST['invite_to'];
-        $topic_id = $_GET['id'];
+        $invite_to = $_GET['invite_to'];
+        $topic_id = $_POST['topic_id'];
         $room_id = $_POST['room_id'];
-
-        echo $invite_to;
 
         $student_id = $_SESSION['id'];
         $stmt = $conn->prepare('SELECT * FROM tbl_student WHERE id = ?');
@@ -53,6 +51,7 @@ if (isset($_SESSION['id'])) {
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
             <div class="container topic">
                 <div class="card">
                     <div class="card-body">

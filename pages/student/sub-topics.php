@@ -37,6 +37,8 @@ if (isset($_SESSION['id'])) {
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <div class="container topic mt-5 mb-3">
                 <div class="card mb-5">
                     <div class="card-body p-5">
@@ -99,9 +101,9 @@ if (isset($_SESSION['id'])) {
                         } else {
                             echo '
                             <a href="practice.php?id=' . $topic_id . '">
-                                <button type="button" class="btn-login w-100 mb-2 fw-bold">Self practice</button>
+                                <button type="button" class="btn-login w-100 mb-2 fw-bold text-white">Self practice</button>
                             </a>
-                            <button type="button" class="btn-login w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#inviteModal">Challenge a friend</button>
+                            <button type="button" class="btn-login w-100 fw-bold text-white" data-bs-toggle="modal" data-bs-target="#inviteModal">Challenge a friend</button>
                         ';
                         }
                         ?>
@@ -114,9 +116,15 @@ if (isset($_SESSION['id'])) {
                                     </div>
                                     <div class="modal-body">
                                         <?php
-                                        echo '<form action="confirmation-invitation.php?id=' . $topic_id . '" method="POST">';
-                                        echo '
-                                            <p>Room ID:
+                                        $stmt = $conn->prepare('SELECT * FROM tbl_student WHERE id <> ?');
+                                        $stmt->bind_param('i', $userId);
+                                        $stmt->execute();
+                                        $student_result = $stmt->get_result();
+                                        while ($student_row = $student_result->fetch_assoc()) {
+                                            $challenger_id = $student_row['id'];
+                                            echo '<form action="confirmation-invitation.php?invite_to=' . $challenger_id . '" method="POST">';
+                                        }
+                                        echo '<p>Room ID:
                                                 <span>
                                                     <input name="room_id" id="roomID" class="fw-bold" type="text" style="background-color: transparent; border: none; outline: none;" readonly />
                                                 </span>
@@ -131,17 +139,21 @@ if (isset($_SESSION['id'])) {
                                             $firstname = $student_row['firstname'];
                                             $middlename = $student_row['middlename'];
                                             $lastname = $student_row['lastname'];
-                                            echo '
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <input type="number" name="invite_to" value="' . $challenger_id . '" style="display: none;">
-                                                    <img src="../../img/' . $img_url . '" width="45" height="45" class="avatar" />
-                                                    <p class="small mt-3 ms-2">' . $firstname . ' ' . $middlename . ' ' . $lastname . '</p>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary btn-sm">Invite</button>
-                                            </div>';
+                                            echo '<form action="confirmation-invitation.php?invite_to=' . $challenger_id .
+                                                '" method="POST">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <input type="number" name="topic_id" value="' . $topic_id . '" style="display: none;">
+                                                            <img src="../../img/' . $img_url .
+                                                '" width="45" height="45" class="avatar" />
+                                                            <p class="small mt-3 ms-2">' . $firstname . ' ' . $middlename . ' ' . $lastname .
+                                                '</p>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary btn-sm">Invite</button>
+                                                    </div>
+                                                </form>
+                                            ';
                                         }
-                                        echo '</form>';
                                         ?>
                                     </div>
                                 </div>

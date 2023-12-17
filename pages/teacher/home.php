@@ -19,6 +19,8 @@ if (isset($_SESSION['id'])) {
 
     <body>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <div class="container starters min-vh-100">
                 <img src="../../img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
                 <h3 class="fw-bold mt-4">ICT Mobile Reviewer</h3>

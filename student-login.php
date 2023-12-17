@@ -74,26 +74,6 @@
         </div>
         <!-- success & error -->
     </main>
-    <footer>
-        <?php
-        if (isset($_GET['invalid'])) {
-        ?>
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom mb-0" role="alert">
-                <span class="text-danger"><?php echo $_GET['invalid'], "Invalid username or password."; ?></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-        if (isset($_GET['error'])) {
-        ?>
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom mb-0" role="alert">
-                <span class="text-danger"><?php echo $_GET['error']; ?></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-        ?>
-    </footer>
 
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>

@@ -34,6 +34,8 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <?php
             if (isset($_GET['warning'])) {
             ?>

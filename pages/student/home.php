@@ -19,6 +19,7 @@ if (isset($_SESSION['id'])) {
 
     <body>
         <main>
+            <?php include '../../includes/refresher.php' ?>
             <div class="container starters min-vh-100">
                 <img src="../../img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
                 <h5 class="mt-4 fw-bold">ICT Mobile Reviewer</h5>
@@ -38,8 +39,6 @@ if (isset($_SESSION['id'])) {
                                 </span>
                             </button>
                         </a>
-                    </div>
-                    <div class="w-100">
                         <a href="#">
                             <button class="btn-b w-100 mt-2">
                                 <span class="d-flex align-items-center justify-content-center">
@@ -47,14 +46,11 @@ if (isset($_SESSION['id'])) {
                                 </span>
                             </button>
                         </a>
-                    </div>
-                    <div class="w-100">
                         <a href="notifications.php">
                             <button class="btn-b w-100 mt-2">
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="bx bx-bell fs-3"></i>&nbsp; Notifications
                                 </span>
-                                <!-- <span class="position-absolute"></span> -->
                                 <?php
                                 $notifications = 0;
                                 $invite_status_id = 2;
@@ -93,7 +89,6 @@ if (isset($_SESSION['id'])) {
                         </a>
                     </div>
                 </div>
-            </div>
         </main>
     </body>
 

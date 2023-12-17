@@ -41,6 +41,7 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
             <div class="starters min-vh-100">
                 <div class="card mt-5 mb-5">
                     <div class="card-body">

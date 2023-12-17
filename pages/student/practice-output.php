@@ -34,6 +34,8 @@ if ($_SESSION['id']) {
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <div class="container practice mt-5 mb-3">
                 <div class="card mb-5">
                     <div class="card-body">
