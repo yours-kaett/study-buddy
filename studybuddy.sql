@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 19, 2023 at 12:54 AM
+-- Generation Time: Dec 17, 2023 at 11:53 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `tbl_invite_practice` (
   KEY `invite_status_id` (`invite_status_id`),
   KEY `topic_id` (`topic_id`),
   KEY `practice_status_id` (`practice_status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -129,8 +129,7 @@ CREATE TABLE IF NOT EXISTS `tbl_practice` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -155,8 +154,7 @@ CREATE TABLE IF NOT EXISTS `tbl_practice_duo` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`),
   KEY `student_id` (`student_id`)
-
-) ENGINE=MyISAM AUTO_INCREMENT=437 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=494 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -201,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `tbl_practice_student` (
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   KEY `topic_id` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -227,7 +225,6 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz` (
   KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -252,7 +249,6 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz_student` (
   KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -276,7 +272,6 @@ INSERT INTO `tbl_section` (`id`, `section`) VALUES
 (3, 'Love'),
 (4, '');
 
-
 -- --------------------------------------------------------
 
 --
@@ -299,8 +294,17 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
   PRIMARY KEY (`id`),
   KEY `grade_level` (`grade_level`),
   KEY `section` (`section`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_student`
+--
+
+INSERT INTO `tbl_student` (`id`, `firstname`, `middlename`, `lastname`, `email`, `username`, `password`, `age`, `grade_level`, `section`, `img_url`) VALUES
+(23, 'empty-fn', 'empty-mn', 'empty-ln', 'jethel@gmail.com', 'jethel', 'e97a498a57fbd2ff3579faa4ab09d187', 1, 3, 4, 'default.png'),
+(24, 'empty-fn', 'empty-mn', 'empty-ln', 'wea@gmail.com', 'wea', 'f3fa311af48b5a2adb1e6b0321d2f213', 1, 3, 4, 'default.png'),
+(25, 'empty-fn', 'empty-mn', 'empty-ln', 'jacque@gmail.com', 'jacque', '3b84db5a4e0526805b8f1e98b78de5fa', 1, 3, 4, 'default.png'),
+(26, 'empty-fn', 'empty-mn', 'empty-ln', 'analiza@gmail.com', 'analiza', '76fa7d28313f9422cbde182a810c630e', 1, 3, 4, 'default.png');
 
 -- --------------------------------------------------------
 
@@ -317,8 +321,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sub_topics` (
   `description` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -337,8 +340,7 @@ CREATE TABLE IF NOT EXISTS `tbl_teacher` (
   `middlename` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `lastname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -353,8 +355,7 @@ CREATE TABLE IF NOT EXISTS `tbl_topics` (
   `teacher_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Constraints for dumped tables
