@@ -2,6 +2,13 @@
 include "../../db-connection.php";
 session_start();
 if (isset($_SESSION['id'])) {
+    $student_id = $_SESSION['id'];
+        $stmt = $conn->prepare('SELECT * FROM tbl_student WHERE id = ?');
+        $stmt->bind_param('i', $student_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $rows = $result->fetch_assoc();
+        $img_url = $rows['img_url'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -35,10 +42,6 @@ if (isset($_SESSION['id'])) {
     <body>
         <main>
             <?php include '../../includes/refresher.php' ?>
-<<<<<<< HEAD
-
-=======
->>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395
             <div class="container starters min-vh-100">
                 <img src="../../img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
                 <h3 class="fw-bold mt-4">ICT Mobile Reviewer</h3>
@@ -60,6 +63,8 @@ if (isset($_SESSION['id'])) {
                                 </span>
                             </button>
                         </a>
+                    </div>
+                    <div class="w-100">
                         <a href="#">
                             <button class="btn-b w-100 mt-2">
                                 <span class="d-flex align-items-center justify-content-center">
@@ -67,6 +72,8 @@ if (isset($_SESSION['id'])) {
                                 </span>
                             </button>
                         </a>
+                    </div>
+                    <div class="w-100">
                         <a href="notifications.php">
                             <button class="btn-b w-100 mt-2 relative">
                                 <span class="d-flex align-items-center justify-content-center">
@@ -99,6 +106,15 @@ if (isset($_SESSION['id'])) {
                                         ';
                                     }
                                     ?>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="w-100">
+                        <a href="account.php">
+                            <button class="btn-b w-100 mt-2">
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <i class="bx bx-user fs-3"></i>&nbsp; Account
                                 </span>
                             </button>
                         </a>

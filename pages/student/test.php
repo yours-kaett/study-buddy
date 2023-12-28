@@ -39,7 +39,7 @@ if (isset($_SESSION['id'])) {
                     <span class="pb-1">&nbsp;Test</span>
                 </h4>
                 <a href="account.php">
-                    <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
+                    <img src="../../uploads/profile/<?php echo $img_url ?>" alt="Profile" width="30" height="30" style="border-radius: 50%;">
                 </a>
             </div>
         </header>

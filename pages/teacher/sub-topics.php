@@ -3,6 +3,11 @@ include '../../db-connection.php';
 session_start();
 
 if ($_SESSION['id']) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+    } else {
+        $previousUrl = 'home.php';
+    }
     $userId = $_SESSION['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_teacher WHERE id = ? ');
     $stmt->bind_param('i', $userId);
@@ -29,9 +34,12 @@ if ($_SESSION['id']) {
     <body>
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-                <h4 class="fw-bolder mt-2">Topics</h4>
+                <h4 class="d-flex align-items-center justify-content-center fw-bolder mt-2">
+                    <a onclick="goBack()"><i class="bx bx-chevron-left fs-1"></i></a>
+                    <span class="pb-1">&nbsp;Topics</span>
+                </h4>
                 <a href="account.php">
-                    <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
+                    <img src="../../uploads/profile/<?php echo $img_url ?>" alt="Profile" width="30" height="30" style="border-radius: 50%;">
                 </a>
             </div>
         </header>
@@ -116,6 +124,11 @@ if ($_SESSION['id']) {
 
         <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../../script.js"></script>
+        <script>
+            function goBack() {
+                window.location.href = "<?php echo $previousUrl; ?>";
+            }
+        </script>
     </body>
 
     </html>

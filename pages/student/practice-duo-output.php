@@ -2,6 +2,11 @@
 include '../../db-connection.php';
 session_start();
 if (($_SESSION['id'])) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+    } else {
+        $previousUrl = 'home.php';
+    }
     $userId = $_SESSION['id'];
     $topic_id = $_GET['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
@@ -33,7 +38,7 @@ if (($_SESSION['id'])) {
                     <span class="pb-1">&nbsp;Challenge Mode Test</span>
                 </h4>
                 <a href="account.php">
-                    <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
+                    <img src="../../uploads/profile/<?php echo $img_url ?>" alt="Profile" width="30" height="30" style="border-radius: 50%;">
                 </a>
             </div>
         </header>
