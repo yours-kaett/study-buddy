@@ -48,7 +48,7 @@
             <img src="img/ICT-StudyBuddyLogo.png" width="100" alt="Study Buddy Logo">
             <h3 class="fw-bold mt-4">Teacher</h3>
             <div class="card">
-                <form action="backend/teacher-signup-sanitize.php" method="POST" class="w-100">
+                <form action="backend/teacher-signup-sanitize.php" method="POST" class="mb-4">
                     <div class="w-100">
                         <input type="email" name="email" placeholder="Email" class="starters-input mb-2 w-100 me-5 mt-2" required>
                     </div>
@@ -58,7 +58,7 @@
                     <div class="w-100">
                         <input type="password" name="password" placeholder="Password" class="starters-input mb-2 w-100 me-5" required>
                     </div>
-                    <div class="w-100">
+                    <div class="w-100 mt-3">
                         <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
                             <span id="create">Create</span>
                             <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

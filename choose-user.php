@@ -15,22 +15,29 @@
 <body>
     <main>
         <div class="container starters min-vh-100">
-            <img src="img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
+            <img src="img/ICT-StudyBuddyLogo.png" width="100" alt="Study Buddy Logo">
             <div class="card">
-                <a href="student-login.php">
-                    <button class="btn-b w-100 mt-4">
-                        <span>
-                            <i class="bx bxs-backpack"></i>&nbsp; Student
-                        </span>
-                    </button>
-                </a>
-                <a href="teacher-login.php">
-                    <button class="btn-a w-100 mt-2">
-                        <span>
-                            <i class="bx bxs-briefcase"></i>&nbsp; Teacher
-                        </span>
-                    </button>
-                </a>
+                <div class="card-body">
+                    <div class="w-100">
+                        <a href="student-login.php">
+                            <button class="btn-b mt-4">
+                                <span>
+                                    <i class="bx bxs-backpack"></i>&nbsp; Student
+                                </span>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="w-100">
+                        <a href="teacher-login.php">
+                            <button class="btn-a mt-2">
+                                <span>
+                                    <i class="bx bxs-briefcase"></i>&nbsp; Teacher
+                                </span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
             </div>
             <!-- <div id="content"></div> -->
         </div>

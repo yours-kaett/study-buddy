@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $rowCounter++;
     }
 
-    header("Location: ../pages/teacher/sub-topics.php?id=". $topic_id."");
+    // header("Location: ../pages/teacher/topics.php?id=". $topic_id."");
+    header("Location: ../pages/teacher/topics.php?test");
     exit();
 } else {
     header("Location: ../pages/teacher/setup-test.php?error=Unknown error occurred.");

@@ -55,7 +55,7 @@
                     <div class="w-100">
                         <input type="password" name="password" placeholder="Password" class="starters-input mb-2 w-100 me-5">
                     </div>
-                    <div class="w-100">
+                    <div class="w-100 mt-3">
                         <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
                             <span id="login">Login</span>
                             <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -72,21 +72,6 @@
                 </div>
             </div>
         </div>
-        <!-- success & error -->
-        <?php
-        if (isset($_GET['error'])) {
-        ?>
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center fixed-bottom" role="alert">
-                <div>
-                    <?php echo $_GET['error']; ?>
-                    <a href="student-login.php">
-                        <button type="button" class="btn-close" aria-label="Close"></button>
-                    </a>
-                </div>
-            </div>
-        <?php
-        }
-        ?>
     </main>
 
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>

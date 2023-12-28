@@ -13,47 +13,48 @@
 </head>
 
 <body>
+    <header>
+        <?php
+        if (isset($_GET['success'])) {
+        ?>
+            <div class="alert alert-primary alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-top mb-2" role="alert">
+                <span class="text-primary"><?php echo $_GET['success'], "Account created successfully."; ?></span>
+                <a href="student-signup.php">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </a>
+            </div>
+        <?php
+        }
+        if (isset($_GET['taken'])) {
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-top mb-2" role="alert">
+                <span class="text-danger"><?php echo $_GET['taken'], "Username already taken."; ?></span>
+                <a href="student-signup.php">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </a>
+            </div>
+        <?php
+        }
+        if (isset($_GET['error'])) {
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-top mb-2" role="alert">
+                <span class="text-danger"><?php echo $_GET['error'], "Unknown error occured."; ?></span>
+                <a href="student-signup.php">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </a>
+            </div>
+        <?php
+        }
+        ?>
+    </header>
     <main>
         <div class="container starters min-vh-100">
-            <img src="img/ICT-StudyBuddyLogo.png" width="150" alt="Study Buddy Logo">
+            <img src="img/ICT-StudyBuddyLogo.png" width="100" alt="Study Buddy Logo">
             <h3 class="fw-bold mt-4">Student</h3>
             <div class="card">
-                <!-- success & error -->
-                <?php
-                if (isset($_GET['taken'])) {
-                ?>
-                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center mb-2 w-100" role="alert">
-                        <div>
-                            <?php echo $_GET['taken'], "Username already taken."; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-                <?php
-                }
-                if (isset($_GET['success'])) {
-                ?>
-                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center mb-2 w-100" role="alert">
-                        <div>
-                            <?php echo $_GET['success'], "Account created successfully."; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-                <?php
-                }
-                if (isset($_GET['unknown'])) {
-                ?>
-                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center mb-2 w-100" role="alert">
-                        <div>
-                            <?php echo $_GET['unknown'], "Unknown error occured."; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-                <?php
-                }
-                ?>
-                <form action="backend/student-signup-sanitize.php" method="POST" class="w-100">
+                <form action="backend/student-signup-sanitize.php" method="POST" class="mb-4">
                     <div class="w-100">
-                        <input type="text" name="email" id="email" placeholder="Email" class="starters-input mb-3 w-100 me-5 mt-2" required>
+                        <input type="email" name="email" id="email" placeholder="Email" class="starters-input mb-3 w-100 me-5 mt-2" required>
                     </div>
                     <div class="w-100">
                         <input type="text" name="username" id="username" placeholder="Username" class="starters-input mb-3 w-100 me-5" required>
@@ -62,7 +63,7 @@
                         <input type="password" name="password" id="password" placeholder="Password" class="starters-input mb-3 w-100 me-5" required>
                     </div>
                     <div class="w-100">
-                        <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
+                        <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" id="submit" type="submit" onclick="submitFn()">
                             <span id="create">Create</span>
                             <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </button>
@@ -74,36 +75,42 @@
             </div>
         </div>
     </main>
-    <footer>
-        <?php
-        if (isset($_GET['success'])) {
-        ?>
-            <div class="alert alert-primary alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom mb-0" role="alert">
-                <span class="text-primary"><?php echo $_GET['success'], "Account created successfully."; ?></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-        if (isset($_GET['invalid'])) {
-        ?>
-            <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom mb-0" role="alert">
-                <span class="text-danger"><?php echo $_GET['invalid'], "Username already taken."; ?></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-        if (isset($_GET['error'])) {
-        ?>
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom mb-0" role="alert">
-                <span class="text-danger"><?php echo $_GET['error'], "Unknown error occured."; ?></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-        ?>
-    </footer>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        let email = document.getElementById("email");
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+        let submit = document.getElementById("submit");
+
+        function signup_data() {
+            const emailValue = email.value.trim();
+            const usernameValue = username.value.trim();
+            const passwordValue = password.value.trim();
+            if (emailValue !== '' && usernameValue !== '' && passwordValue !== '') {
+                submit.removeAttribute('disabled');
+                submit.classList.remove("bg-secondary");
+                submit.style.color = "#d9fef2";
+                submit.style.cursor = "pointer";
+            } else {
+                submit.setAttribute('disabled', 'disabled');
+                submit.classList.add("bg-secondary");
+                submit.style.color = "#cccccc";
+                submit.style.cursor = "not-allowed";
+            }
+        }
+        email.addEventListener("input", signup_data);
+        username.addEventListener("input", signup_data);
+        password.addEventListener("input", signup_data);
+        signup_data();
+
+        function submitFn() {
+            document.getElementById('login').style.display = "none"
+            document.getElementById('spinner').style.display = "flex"
+            document.getElementById('spinner').style.alignItems = "center"
+            document.getElementById('spinner').style.justifyContent = "center"
+        }
+    </script>
 </body>
 
 </html>

@@ -2,6 +2,11 @@
 include '../../db-connection.php';
 session_start();
 if ($_SESSION['id']) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+    } else {
+        $previousUrl = 'home.php';
+    }
     $userId = $_SESSION['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_teacher WHERE id = ? ');
     $stmt->bind_param('i', $userId);
@@ -21,19 +26,24 @@ if ($_SESSION['id']) {
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
-        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
+        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.png">
     </head>
 
     <body>
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-                <h4 class="fw-bolder mt-2">Topics</h4>
+                <h4 class="d-flex align-items-center justify-content-center fw-bolder mt-2">
+                    <a onclick="goBack()"><i class="bx bx-chevron-left fs-1"></i></a>
+                    <span class="pb-1">&nbsp;Setup Test</span>
+                </h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <div class="container starters">
                 <div class="card w-100 mt-5 mb-5 p-3">
                     <div class="card-body">
@@ -72,18 +82,6 @@ if ($_SESSION['id']) {
                             $result = $stmt->get_result();
                             $rows = $result->fetch_assoc();
                             $id = $rows['id'];
-
-                            $stmt = $conn->prepare(' SELECT 
-                            tbl_sub_topics.id,
-                            tbl_sub_topics.topic_id,
-                            tbl_topics.topic_title
-                            FROM tbl_sub_topics 
-                            INNER JOIN tbl_topics ON tbl_sub_topics.topic_id = tbl_topics.id
-                            WHERE tbl_sub_topics.topic_id = ? ');
-                            $stmt->bind_param('i', $_GET['id']);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-                            $rows = $result->fetch_assoc();
                             $topic_title = $rows['topic_title'];
                             ?>
                             <div class="w-100 mb-3">
@@ -93,12 +91,12 @@ if ($_SESSION['id']) {
                                 <input type="text" value="<?php echo $topic_title ?>" style="display: flex;" class="starters-input w-100" readonly>
                             </div>
                             <div id="rows-container"></div>
-                            <button class="btn btn-primary" id="addRow" type="button">
-                                <i class="bi bi-plus-lg"></i>&nbsp; Add
+                            <button class="btn btn-primary btn-sm" id="addRow" type="button">
+                                <i class="bx bx-plus"></i>&nbsp; Add item
                             </button>
                             <div class="w-100 mt-5">
                                 <button class="btn-login w-100 d-flex align-items-center justify-content-center" type="submit">
-                                    <span id="login"><i class="bi bi-save"></i>&nbsp; Save</span>
+                                    <span id="login" class="text-white"><i class="bx bx-save"></i>&nbsp; Save</span>
                                     <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </button>
                             </div>
@@ -118,14 +116,11 @@ if ($_SESSION['id']) {
                     <i class="bx bxs-collection fs-3 fw-bolder"></i>
                     Topics
                 </a>
-                <a href="add-topic.php" class="d-flex flex-column align-items-center">
-                    <i class="bx bx-layer-plus fw-bolder" style="font-size: 40px;"></i>
-                </a>
                 <a href="setup-quiz.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-pencil fs-3 fw-bolder"></i>
                     Setup Quiz
                 </a>
-                <a href="#" class="d-flex flex-column align-items-center">
+                <a href="students.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-group fs-3 fw-bolder"></i>
                     Students
                 </a>
@@ -179,6 +174,11 @@ if ($_SESSION['id']) {
                     rowCounter++;
                 });
             });
+        </script>
+        <script>
+            function goBack() {
+                window.location.href = "<?php echo $previousUrl; ?>";
+            }
         </script>
 
     </body>

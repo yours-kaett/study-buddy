@@ -2,6 +2,11 @@
 include '../../db-connection.php';
 session_start();
 if ($_SESSION['id']) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+    } else {
+        $previousUrl = 'home.php';
+    }
     $userId = $_SESSION['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_teacher WHERE id = ? ');
     $stmt->bind_param('i', $userId);
@@ -21,19 +26,24 @@ if ($_SESSION['id']) {
         <link rel="stylesheet" href="../../bootstrap/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="../../boxicons/css/boxicons.min.css">
         <link rel="stylesheet" href="../../style.css">
-        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.ico">
+        <link rel="icon" href="../../img/ICT-StudyBuddyLogo.png">
     </head>
 
     <body>
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-                <h4 class="fw-bolder mt-2">Topics</h4>
+                <h4 class="d-flex align-items-center justify-content-center fw-bolder mt-2">
+                    <a onclick="goBack()"><i class="bx bx-chevron-left fs-1"></i></a>
+                    <span class="pb-1">&nbsp;Topics</span>
+                </h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <div class="container starters">
                 <div class="card w-100 mt-5 mb-5 p-3">
                     <div class="card-body">
@@ -140,6 +150,11 @@ if ($_SESSION['id']) {
                     rowCounter++;
                 });
             });
+        </script>
+        <script>
+            function goBack() {
+                window.location.href = "<?php echo $previousUrl; ?>";
+            }
         </script>
 
     </body>

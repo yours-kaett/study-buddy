@@ -1,53 +1,54 @@
 <?php
 include "../db-connection.php";
 session_start();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    function validate($data)
-    {
-        return htmlspecialchars(trim($data));
-    }
-    $userId = $_SESSION['id'];
-    $topic_title = validate($_POST['topic_title']);
-
-    $stmt = $conn->prepare("SELECT id, topic_title FROM tbl_topics WHERE topic_title = ?");
-    $stmt->bind_param("s", $topic_title);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        header("Location: ../pages/teacher/add-topic.php?error=Topic title already exist.");
+if (isset($_POST["submit"])) {
+    $targetDir = "../modules/";
+    $filename = basename($_FILES["fileToUpload"]["name"]);
+    $targetFile = $targetDir . $filename;
+    $tmp_name = $_FILES['fileToUpload']['tmp_name'];
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $allowedExtensions = array("pdf", "doc", "docx");
+    if (!in_array($imageFileType, $allowedExtensions)) {
+        header("Location: ../pages/teacher/topics.php?not_allowed");
         exit();
     } else {
-
-        $stmt = $conn->prepare("INSERT INTO tbl_topics (topic_title, teacher_id) VALUES (?, ?)");
-        $stmt->bind_param('si', $topic_title, $userId);
-        $stmt->execute();
-        $topic_id = $stmt->insert_id;
-
-        $rowCounter = 0;
-        while (isset($_POST["lesson_number_$rowCounter"]) && 
-            isset($_POST["sub_topic_title_$rowCounter"])&& 
-            isset($_POST["description_$rowCounter"]) ) {
-
-            $lesson_number = validate($_POST["lesson_number_$rowCounter"]);
-            $sub_topic_title = validate($_POST["sub_topic_title_$rowCounter"]);
-            $description = validate($_POST["description_$rowCounter"]);
-            
-            $stmt = $conn->prepare("INSERT INTO tbl_sub_topics (topic_id, lesson_number, sub_topic_title, description) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param('iiss', $topic_id, $lesson_number, $sub_topic_title, $description);
-            $stmt->execute();
-            if ($stmt->error) {
-                header("Location: ../pages/teacher/add-topic.php?error");
+        if (file_exists($targetFile)) {
+            header("Location: ../pages/teacher/topics.php?file_exist");
+            exit();
+        } else {
+            if ($_FILES["fileToUpload"]["size"] > 100000000) {
+                header("Location: ../pages/teacher/topics.php?too_large");
                 exit();
+            } else {
+                function validate($data)
+                {
+                    $data = trim($data);
+                    $data = stripslashes($data);
+                    $data = htmlspecialchars($data);
+                    return $data;
+                }
+                $topic_title = validate($_POST['topic_title']);
+                $teacher_id = $_SESSION['id'];
+                date_default_timezone_set('Asia/Manila');
+                $created_at = date("F j, Y | l - h:i:s a");
+                $stmt = $conn->prepare("SELECT * FROM tbl_topics WHERE topic_title = ?");
+                $stmt->bind_param("s", $topic_title);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    header("Location: ../pages/teacher/topics.php?topic_exist");
+                    exit();
+                } else {
+                    $upload_path = $targetDir . $filename;
+                    move_uploaded_file($tmp_name, $upload_path);
+                    $stmt = $conn->prepare("INSERT INTO tbl_topics (topic_title, filename, filepath, teacher_id, created_at) VALUES (?, ?, ?, ?, ?)");
+                    $stmt->bind_param('sssis', $topic_title, $filename, $upload_path, $teacher_id, $created_at);
+                    $stmt->execute();
+                    header("Location: ../pages/teacher/topics.php?success");
+                    exit();
+                }
             }
-            $rowCounter++;
         }
-
-        header("Location: ../pages/teacher/topics.php");
-        exit();
     }
-} else {
-    header("Location: ../pages/teacher/topics.php?error=Unknown error occurred.");
-    exit();
 }

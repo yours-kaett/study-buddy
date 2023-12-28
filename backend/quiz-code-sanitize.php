@@ -29,7 +29,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
             header("Location: ../pages/student/quiz.php?id=" . $rows['quiz_code'] . "");
             exit();
         } else {
-            header("Location: ../pages/student/quiz-code-input.php?error&$quiz_code_data");
+            header("Location: ../pages/student/quiz-code-input.php?notfound");
             exit();
         }
     }

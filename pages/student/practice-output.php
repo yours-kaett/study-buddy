@@ -2,6 +2,11 @@
 include '../../db-connection.php';
 session_start();
 if ($_SESSION['id']) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+    } else {
+        $previousUrl = 'home.php';
+    }
     $userId = $_SESSION['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
     $stmt->bind_param('i', $userId);
@@ -26,14 +31,19 @@ if ($_SESSION['id']) {
 
     <body>
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 border">
-                <h4 class="fw-bolder mt-2">Self Practice</h4>
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
+                <h4 class="d-flex align-items-center justify-content-center fw-bolder mt-2">
+                    <a onclick="goBack()"><i class="bx bx-chevron-left fs-1"></i></a>
+                    <span class="pb-1">&nbsp;Self Learning</span>
+                </h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <div class="container practice mt-5 mb-3">
                 <div class="card mb-5">
                     <div class="card-body">
@@ -120,8 +130,9 @@ if ($_SESSION['id']) {
                         ?>
                         <div class="w-100">
                             <a href="practice.php?id=<?php echo $_GET['id']; ?>">
-                                <button class="btn-login">
-                                    Retake
+                                <button class="btn-login fw-bold d-flex align-items-center justify-content-center w-100" type="submit" onclick="submitFn()">
+                                    <span id="login">Retake</span>
+                                    <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </button>
                             </a>
                         </div>
@@ -134,19 +145,19 @@ if ($_SESSION['id']) {
             <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
                 <a href="home.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-home-alt fs-3 fw-bolder"></i>
-                    Home
+                    <span class="fw-bold">Home</span>
                 </a>
                 <a href="#" class="d-flex flex-column align-items-center" style="color: #3552a1;">
                     <i class="bx bxs-collection fs-3 fw-bolder"></i>
-                    Topics
+                    <span class="fw-bold">Topics</span>
                 </a>
                 <a href="quiz-code-input.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-pencil fs-3 fw-bolder"></i>
-                    Quiz
+                    <span class="fw-bold">Quiz</span>
                 </a>
                 <a href="notifications.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-bell fs-3 fw-bolder"></i>
-                    <span>Notifications
+                    <span class="fw-bold">Notifications
                         <?php
                         $notifications = 0;
                         $invite_status_id = 2;
@@ -180,6 +191,17 @@ if ($_SESSION['id']) {
 
         <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../../script.js"></script>
+        <script>
+            function submitFn() {
+                document.getElementById('login').style.display = "none"
+                document.getElementById('spinner').style.display = "flex"
+                document.getElementById('spinner').style.alignItems = "center"
+                document.getElementById('spinner').style.justifyContent = "center"
+            }
+            function goBack() {
+                window.location.href = "<?php echo $previousUrl; ?>";
+            }
+        </script>
 
     </body>
 

@@ -2,6 +2,11 @@
 include '../../db-connection.php';
 session_start();
 if ($_SESSION['id']) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+    } else {
+        $previousUrl = 'home.php';
+    }
     $userId = $_SESSION['id'];
     $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
     $stmt->bind_param('i', $userId);
@@ -27,13 +32,18 @@ if ($_SESSION['id']) {
     <body>
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-                <h4 class="fw-bolder mt-2">Quiz Code</h4>
+                <h4 class="d-flex align-items-center justify-content-center fw-bolder mt-2">
+                    <a onclick="goBack()"><i class="bx bx-chevron-left fs-1"></i></a>
+                    <span class="pb-1">&nbsp;Quiz Code</span>
+                </h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <?php
             if (isset($_GET['warning'])) {
             ?>
@@ -68,6 +78,18 @@ if ($_SESSION['id']) {
                             </div>
                         <?php
                         }
+                        if (isset($_GET['notfound'])) {
+                        ?>
+                            <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center mb-2" role="alert">
+                                <div>
+                                    <?php echo $_GET['notfound'], "Quiz code not found."; ?>
+                                    <a href="quiz-code-input.php">
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php
+                        }
                         ?>
                         <form action="../../backend/quiz-code-sanitize.php" method="POST" class="w-100 mb-4 mt-4">
                             <div class="row mb-3">
@@ -87,7 +109,7 @@ if ($_SESSION['id']) {
                                 </div>
                             </div>
                             <div class="w-100">
-                                <button class="btn-login fw-bold d-flex align-items-center justify-content-center w-100" type="submit">
+                                <button class="btn-login fw-bold d-flex align-items-center justify-content-center w-100" type="submit" onclick="submitFn()">
                                     <span id="login">Join</span>
                                     <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </button>
@@ -102,19 +124,19 @@ if ($_SESSION['id']) {
             <div class="d-flex align-items-center justify-content-between bottom-0 fixed-bottom px-5">
                 <a href="home.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-home-alt fs-3 fw-bolder"></i>
-                    Home
+                    <span class="fw-bold">Home</span>
                 </a>
                 <a href="topics.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-collection fs-3 fw-bolder"></i>
-                    Topics
+                    <span class="fw-bold">Topics</span>
                 </a>
                 <a href="quiz-code-input.php" class="d-flex flex-column align-items-center" style="color: #3552a1;">
                     <i class="bx bxs-pencil fs-3 fw-bolder"></i>
-                    Quiz
+                    <span class="fw-bold">Quiz</span>
                 </a>
                 <a href="notifications.php" class="d-flex flex-column align-items-center">
                     <i class="bx bx-bell fs-3 fw-bolder"></i>
-                    <span>Notifications
+                    <span class="fw-bold">Notifications
                         <?php
                         $notifications = 0;
                         $invite_status_id = 2;
@@ -148,7 +170,18 @@ if ($_SESSION['id']) {
 
         <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../../script.js"></script>
-
+        <script>
+            function submitFn() {
+                document.getElementById('login').style.display = "none"
+                document.getElementById('spinner').style.display = "flex"
+                document.getElementById('spinner').style.alignItems = "center"
+                document.getElementById('spinner').style.justifyContent = "center"
+            }
+            
+            function goBack() {
+                window.location.href = "<?php echo $previousUrl; ?>";
+            }
+        </script>
     </body>
 
     </html>

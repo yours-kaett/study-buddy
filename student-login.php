@@ -19,7 +19,9 @@
     ?>
         <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
             <span class="text-secondary"><?php echo $_GET['invalid'], "Invalid username or password."; ?>
+            <a href="student-login.php">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </a>
         </div>
     <?php
     }
@@ -27,7 +29,9 @@
     ?>
         <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
             <span class="text-danger"><?php echo $_GET['unknown'], "Unknown error occured."; ?>
+            <a href="student-login.php">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </a>
         </div>
     <?php
     }
@@ -35,7 +39,9 @@
     ?>
         <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
             <span class="text-secondary"><?php echo $_GET['error']; ?>
+            <a href="student-login.php">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </a>
         </div>
     <?php
     }
@@ -50,13 +56,13 @@
             <div class="card">
                 <form action="backend/student-login-sanitize.php" method="POST" class="mb-4">
                     <div class="w-100">
-                        <input type="text" name="username" placeholder="Username" class="starters-input mb-2 w-100 me-5 mt-2">
+                        <input type="text" name="username" id="username" placeholder="Username" class="starters-input mb-2 w-100 me-5 mt-2">
                     </div>
                     <div class="w-100">
-                        <input type="password" name="password" placeholder="Password" class="starters-input mb-2 w-100 me-5">
+                        <input type="password" name="password" id="password" placeholder="Password" class="starters-input mb-2 w-100 me-5">
                     </div>
-                    <div class="w-100">
-                        <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" type="submit" onclick="submitFn()">
+                    <div class="w-100 mt-3">
+                        <button class="btn-login w-100 me-5 d-flex align-items-center justify-content-center" id="submit" type="submit" onclick="submitFn()">
                             <span id="login">Login</span>
                             <span id="spinner" style="display: none; padding: 9px;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </button>
@@ -74,29 +80,40 @@
         </div>
         <!-- success & error -->
     </main>
-    <footer>
-        <?php
-        if (isset($_GET['invalid'])) {
-        ?>
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom mb-0" role="alert">
-                <span class="text-danger"><?php echo $_GET['invalid'], "Invalid username or password."; ?></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-        if (isset($_GET['error'])) {
-        ?>
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom mb-0" role="alert">
-                <span class="text-danger"><?php echo $_GET['error']; ?></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-        ?>
-    </footer>
 
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+        let submit = document.getElementById("submit");
+
+        function login_data() {
+            const usernameValue = username.value.trim();
+            const passwordValue = password.value.trim();
+            if (usernameValue !== '' && passwordValue !== '') {
+                submit.removeAttribute('disabled');
+                submit.classList.remove("bg-secondary");
+                submit.style.color = "#d9fef2";
+                submit.style.cursor = "pointer";
+            } else {
+                submit.setAttribute('disabled', 'disabled');
+                submit.classList.add("bg-secondary");
+                submit.style.color = "#cccccc";
+                submit.style.cursor = "not-allowed";
+            }
+        }
+        username.addEventListener("input", login_data);
+        password.addEventListener("input", login_data);
+        login_data();
+
+        function submitFn() {
+            document.getElementById('login').style.display = "none"
+            document.getElementById('spinner').style.display = "flex"
+            document.getElementById('spinner').style.alignItems = "center"
+            document.getElementById('spinner').style.justifyContent = "center"
+        }
+    </script>
 
 </body>
 

@@ -1,9 +1,21 @@
 <?php
 include '../../db-connection.php';
 session_start();
-if (($_SESSION['id'])) {
+if ($_SESSION['id']) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $previousUrl = $_SERVER['HTTP_REFERER'];
+    } else {
+        $previousUrl = 'home.php';
+    }
     $userId = $_SESSION['id'];
-    $topic_id = $_GET['id'];
+    $room_id = $_GET['id'];
+    $stmt = $conn->prepare(' SELECT * FROM tbl_practice_duo WHERE room_id = ? ');
+    $stmt->bind_param('i', $room_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = $result->fetch_assoc();
+    $topic_id = $rows['topic_id'];
+
     $stmt = $conn->prepare(' SELECT * FROM tbl_student WHERE id = ? ');
     $stmt->bind_param('i', $userId);
     $stmt->execute();
@@ -11,7 +23,6 @@ if (($_SESSION['id'])) {
     $rows = $result->fetch_assoc();
     $img_url = $rows['img_url'];
 ?>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -28,14 +39,19 @@ if (($_SESSION['id'])) {
 
     <body onload="loaderFunction()">
         <header>
-            <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2">
-                <h4 class="fw-bolder mt-2">Challenge Mode</h4>
+            <div class="d-flex align-items-center justify-content-between top-0 fixed-top px-2">
+                <h4 class="d-flex align-items-center justify-content-center fw-bolder mt-2">
+                    <a href="test.php?id=<?php echo $topic_id; ?>"><i class="bx bx-chevron-left fs-1"></i></a>
+                    <span class="pb-1">&nbsp;Challenge Mode Test</span>
+                </h4>
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
             </div>
         </header>
         <main>
+            <?php include '../../includes/refresher.php' ?>
+
             <?php
             $room_id = $_GET['id'];
 
@@ -125,52 +141,38 @@ if (($_SESSION['id'])) {
                             $stmt->bind_param('i', $topic_id);
                             $stmt->execute();
                             $result = $stmt->get_result();
-                            while ($rows = $result->fetch_assoc()) {
+                            $rows_array = array();
+                            while ($row = $result->fetch_assoc()) {
+                                $rows_array[] = $row;
+                            }
+                            shuffle($rows_array);
+                            foreach ($rows_array as $rows) {
                                 $item_number = $rows['item_number'];
                                 $question = $rows['question'];
-                                $choice1 = $rows['choice1'];
-                                $choice2 = $rows['choice2'];
-                                $choice3 = $rows['choice3'];
-                                $choice4 = $rows['choice4'];
-                                $correct_answer = $rows['correct_answer'];
-                                $student_answer = $rows['student_answer'];
+                                $choices = array(
+                                    $rows['choice1'],
+                                    $rows['choice2'],
+                                    $rows['choice3'],
+                                    $rows['choice4']
+                                );
+                                shuffle($choices);
                                 echo '
-                                    <h6 class="fw-bold">' . $item_number . ". " . $question . '</h6>
+                                    <h6>' . $question . '</h6>
                                     <fieldset class="row mb-4 mt-3">
-                                        <div class="col-sm-10">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option1_' . $item_number . '" value="' . $choice1 . '" required>
-                                                <label class="form-check-label" for="option1_' . $item_number . '">
-                                                    ' . $choice1 . '
-                                                </label>
-                                            </div>
-                                        </div3
-                                        <div class="col-sm-10">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option2_' . $item_number . '" value="' . $choice2 . '" required>
-                                                <label class="form-check-label" for="option2_' . $item_number . '">
-                                                    ' . $choice2 . '
-                                                </label>
-                                            </div>
-                                        </div3
-                                        <div class="col-sm-10">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option3_' . $item_number . '" value="' . $choice3 . '" required>
-                                                <label class="form-check-label" for="option3_' . $item_number . '">
-                                                    ' . $choice3 . '
-                                                </label>
-                                            </div>
-                                        </div3
-                                        <div class="col-sm-10">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option4_' . $item_number . '" value="' . $choice4 . '" required>
-                                                <label class="form-check-label" for="option4_' . $item_number . '">
-                                                    ' . $choice4 . '
-                                                </label>
-                                            </div>
+                                ';
+                                foreach ($choices as $index => $choice) {
+                                    echo '
+                                    <div class="col-sm-10">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="answers[' . $item_number . ']" id="option' . ($index + 1) . '_' . $item_number . '" value="' . $choice . '" required>
+                                            <label class="form-check-label" for="option' . ($index + 1) . '_' . $item_number . '">
+                                                ' . $choice . '
+                                            </label>
                                         </div>
-                                    </fieldset>
-                                    ';
+                                    </div>
+                                ';
+                                }
+                                echo '</fieldset>';
                             }
                             ?>
                             <hr>
@@ -193,19 +195,19 @@ if (($_SESSION['id'])) {
             <div class="d-flex align-items-center justify-content-between fixed-bottom px-5">
                 <a href="home.php" class="d-flex flex-column align-items-center mt-2">
                     <i class="bx bx-home-alt fs-3 fw-bolder"></i>
-                    Home
+                    <span class="fw-bold">Home</span>
                 </a>
                 <a href="#" class="d-flex flex-column align-items-center mt-2" style="color: #3552a1;">
                     <i class="bx bxs-collection fs-3 fw-bolder"></i>
-                    Topics
+                    <span class="fw-bold">Topics</span>
                 </a>
                 <a href="quiz-code-input.php" class="d-flex flex-column align-items-center mt-2">
                     <i class="bx bx-pencil fs-3 fw-bolder"></i>
-                    Quiz
+                    <span class="fw-bold">Quiz</span>
                 </a>
                 <a href="notifications.php" class="d-flex flex-column align-items-center mt-2">
                     <i class="bx bx-bell fs-3 fw-bolder"></i>
-                    <span>Notifications
+                    <span class="fw-bold">Notifications
                         <?php
                         $notifications = 0;
                         $invite_status_id = 2;
@@ -239,6 +241,11 @@ if (($_SESSION['id'])) {
 
         <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../../script.js"></script>
+        <script>
+            function goBack() {
+                window.location.href = "<?php echo $previousUrl; ?>";
+            }
+        </script>
 
     </body>
 
