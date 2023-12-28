@@ -49,14 +49,10 @@ if (isset($_SESSION['id'])) {
     <body onload="generateRoomID()">
         <header>
             <div class="d-flex align-items-center justify-content-between top-0 fixed-top p-2 mx-2">
-<<<<<<< HEAD
                 <h4 class="d-flex align-items-center justify-content-center fw-bolder mt-2">
                     <a onclick="goBack()"><i class="bx bx-chevron-left fs-1"></i></a>
                     <span class="pb-1">&nbsp;Challenge a friend</span>
                 </h4>
-=======
-                <h4 class="fw-bolder mt-2">ICT Topics</h4>
->>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395
                 <a href="account.php">
                     <img src="../../img/<?php echo $img_url ?>" alt="Profile" width="35">
                 </a>
@@ -66,11 +62,7 @@ if (isset($_SESSION['id'])) {
             <?php include '../../includes/refresher.php' ?>
             <div class="container topic">
                 <div class="card">
-<<<<<<< HEAD
                     <div class="card-body p-5">
-=======
-                    <div class="card-body">
->>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395
                         <?php
 
                         $stmt = $conn->prepare('SELECT id, topic_title FROM tbl_topics WHERE id = ?');
@@ -80,7 +72,6 @@ if (isset($_SESSION['id'])) {
                         $rows = $result->fetch_assoc();
                         $topic_title = $rows['topic_title'];
                         echo '
-<<<<<<< HEAD
                             <h5 class="fw-bold mb-5">Topic: ' . $topic_title . ' </h5>
                         ';
 
@@ -99,23 +90,6 @@ if (isset($_SESSION['id'])) {
                                     <button type="submit" class="btn btn-sm btn-primary w-50">
                                         <i class="bx bx-check"></i>&nbsp; Yes
                                     </button>
-=======
-                            <h5>Topic: ' . $topic_title . ' </h5>
-                        ';
-
-                        ?>
-                        <form action="../../backend/invitation-sanitize.php?id=<?php echo $topic_id ?>" method="POST">
-                            <div class="d-flex flex-column">
-                                <!-- Other name appear -->
-                                <h5 class="text-center mt-4 mb-4">Are you sure you want to challenge <?php echo $firstname; ?> ?</h5>
-                                <input type="text" name="invite_to" value="<?php echo $invite_to ?>" style="display: none;">
-                                <input type="text" name="room_id" value="<?php echo $room_id ?>" style="display: none;">
-                                <div class="d-flex align-items justify-content-evenly">
-                                    <a href="sub-topics.php?id=<?php echo $topic_id ?>" class="btn btn-sm btn-secondary w-25">
-                                        <button type="button" class="btn text-white">No</button>
-                                    </a>
-                                    <button type="submit" class="btn btn-sm btn-primary w-25">Yes</button>
->>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395
                                 </div>
                             </div>
                         </form>
@@ -186,12 +160,9 @@ if (isset($_SESSION['id'])) {
                 }
                 document.getElementById("roomID").value = room_id;
             }
-<<<<<<< HEAD
             function goBack() {
                 window.location.href = "<?php echo $previousUrl; ?>";
             }
-=======
->>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395
         </script>
     </body>
 
