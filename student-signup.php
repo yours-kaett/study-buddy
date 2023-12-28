@@ -75,6 +75,37 @@
             </div>
         </div>
     </main>
+<<<<<<< HEAD
+=======
+    <footer>
+        <?php
+        if (isset($_GET['success'])) {
+        ?>
+            <div class="alert alert-primary alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom" role="alert">
+                <span class="text-primary"><?php echo $_GET['success'], "Account created successfully."; ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        }
+        if (isset($_GET['taken'])) {
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom" role="alert">
+                <span class="text-danger"><?php echo $_GET['taken'], "Username already taken."; ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        }
+        if (isset($_GET['unknown'])) {
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom" role="alert">
+                <span class="text-danger"><?php echo $_GET['unknown'], "Unknown error occured."; ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        }
+        ?>
+    </footer>
+>>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
     <script>

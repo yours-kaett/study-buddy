@@ -1,12 +1,17 @@
 <?php
 include '../../db-connection.php';
 session_start();
+<<<<<<< HEAD:pages/student/test.php
 if (isset($_SESSION['id'])) {
     if (isset($_SERVER['HTTP_REFERER'])) {
         $previousUrl = $_SERVER['HTTP_REFERER'];
     } else {
         $previousUrl = 'home.php';
     }
+=======
+
+if (isset($_SESSION['id'])) {
+>>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395:pages/student/sub-topics.php
     $userId = $_SESSION['id'];
     $topic_id = $_GET['id'];
     $stmt = $conn->prepare('SELECT * FROM tbl_student WHERE id = ?');
@@ -71,6 +76,31 @@ if (isset($_SESSION['id'])) {
                             <h5 class="fw-bold mb-5">Topic: ' . $topic_title . ' </h5>
                         ';
 
+<<<<<<< HEAD:pages/student/test.php
+=======
+                        $stmt = $conn->prepare('SELECT 
+                            tbl_sub_topics.topic_id,
+                            tbl_topics.topic_title,
+                            tbl_topics.id as route_topic_id,
+                            tbl_sub_topics.sub_topic_title,
+                            tbl_sub_topics.description
+                            FROM tbl_sub_topics 
+                            INNER JOIN tbl_topics ON tbl_sub_topics.topic_id = tbl_topics.id
+                            WHERE tbl_sub_topics.topic_id = ? ');
+                        $stmt->bind_param('i', $topic_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        while ($rows = $result->fetch_assoc()) {
+                            echo '
+                            <div class="container">
+                                <h5 class="text-center mt-4 mb-4">' . $rows['sub_topic_title'] . '</h5>
+                            </div>
+                            <div class="container">
+                                <p class="small">' . $rows['description'] . '</p>
+                            </div>
+                            ';
+                        }
+>>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395:pages/student/sub-topics.php
                         if (mysqli_num_rows($result) == 0) {
                             echo "<div class='d-flex align-items-center flex-column mt-5 pt-5'>
                                     <i class='bx bx-task-x text-secondary' style='font-size: 80px;'></i>
@@ -86,9 +116,15 @@ if (isset($_SESSION['id'])) {
                         } else {
                             echo '
                             <a href="practice.php?id=' . $topic_id . '">
+<<<<<<< HEAD:pages/student/test.php
                                 <button type="button" class="btn-a rounded-5 w-100 mb-2 fw-bold text-white">Self practice</button>
                             </a>
                             <button type="button" class="btn-b rounded-5 w-100 fw-bold text-white" data-bs-toggle="modal" data-bs-target="#inviteModal">Challenge a friend</button>
+=======
+                                <button type="button" class="btn-login w-100 mb-2 fw-bold text-white">Self practice</button>
+                            </a>
+                            <button type="button" class="btn-login w-100 fw-bold text-white" data-bs-toggle="modal" data-bs-target="#inviteModal">Challenge a friend</button>
+>>>>>>> a489d5cbdc8c00dc8f796aab1f2ebff76150d395:pages/student/sub-topics.php
                         ';
                         }
                         ?>

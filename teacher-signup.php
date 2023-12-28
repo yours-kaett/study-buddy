@@ -12,36 +12,6 @@
     <link rel="icon" href="img/ICT-StudyBuddyLogo.ico">
 </head>
 
-<header>
-    <!-- success & error -->
-    <?php
-    if (isset($_GET['success'])) {
-    ?>
-        <div class="alert alert-primary alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
-            <span class="text-success"><?php echo $_GET['success'], "Account created successfully."; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php
-    }
-    if (isset($_GET['taken'])) {
-    ?>
-        <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
-            <span class="text-secondary"><?php echo $_GET['taken'], "Username already taken."; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php
-    }
-    if (isset($_GET['unknown'])) {
-    ?>
-        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center fixed-top rounded-0 mb-2 w-100" role="alert">
-            <span class="text-danger"><?php echo $_GET['unknown'], "Unknown error occured."; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php
-    }
-    ?>
-</header>
-
 <body>
     <main>
         <div class="container starters min-vh-100">
@@ -71,6 +41,36 @@
             </div>
         </div>
     </main>
+
+    <footer>
+        <?php
+        if (isset($_GET['success'])) {
+        ?>
+            <div class="alert alert-primary alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom" role="alert">
+                <span class="text-primary"><?php echo $_GET['success'], "Account created successfully."; ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        }
+        if (isset($_GET['taken'])) {
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom" role="alert">
+                <span class="text-danger"><?php echo $_GET['taken'], "Username already taken."; ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        }
+        if (isset($_GET['unknown'])) {
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-center rounded-0 fixed-bottom" role="alert">
+                <span class="text-danger"><?php echo $_GET['unknown'], "Unknown error occured."; ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        }
+        ?>
+    </footer>
+
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
     <script>

@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `tbl_practice_student` (
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   KEY `topic_id` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
